@@ -3,74 +3,142 @@ using System.Collections;
 
 public class ParseLogicArray : MonoBehaviour {
 
-	private GameObject objCond;
-    private GameObject objAct;
-    private FindNearestEnemy findNearestEnemy;
+	public GameObject objCond;
+    public GameObject objAct;
+    private Find find;
     private UnitLogicArray logicArray;
-    private int[] logic;
     private bool proceed;
+    private int i;
+    private float checkRate;
+    private float nextCheck;
 
     void Start()
     {
-        findNearestEnemy = GetComponent<FindNearestEnemy>();
+        find = GetComponent<Find>();
         logicArray = GetComponent<UnitLogicArray>();
-        //GameObject findNearestEnemy = GetComponent<FindNearestEnemy>();
-        proceed = false;
+
+        MonoBehaviour[] scripts = gameObject.GetComponents<MonoBehaviour>();
+        foreach (MonoBehaviour script in scripts)
+        {
+            if (script != find && script != logicArray && script != gameObject.GetComponent<ParseLogicArray>() && script != gameObject.GetComponent<Health>())
+                script.enabled = false;//turns off all scripts except find, unit logic array, parse logic array, and health
+        }
+        i = 0;
+        checkRate = 1;
     }
 
     void Update()
     {
-        Check();//checks conditions, returns true or false if fulfilled
-        if (Check() == true)
+        if (Time.time > nextCheck)
         {
-            Action();//Acts if conditions fulfilled
+            Check();//checks conditions, returns true or false if fulfilled
+            if (Check() == true)
+            {
+                Action();//Acts if conditions fulfilled
+            }
+            if (Check() == false)
+            {
+                i++;//put move to next row of logic matrix here
+            }
+            nextCheck = Time.time + checkRate;
         }
     }
 
 /// <summary>
-/// CHECK
+/// CHECKS CONDITION TO SEE IF ACTION CAN BE PERFORMED
 /// </summary>
 
 	bool Check () {
-        logic = logicArray.logic;
-        if (logic[0] == 0)//set object(condition) to self
-        {
-            objCond = gameObject;
-        }
-        else if (logic[0] == 1)//set object(condition) to nearest enemy
-        {
-            objCond = findNearestEnemy.closest;
-        }
-        else if (logic[0] == 2)//set object(condition) to nearest ally
-        {
-            //objCond =
-        }
+        proceed = false;
+            if (logicArray.logic[i, 0] == 0)//set object(condition) to self
+            {
+            print("asdf");
+                objCond = gameObject;
+            }
+            else if (logicArray.logic[i, 0] == 1)//set object(condition) to nearest enemy
+            {
+            print("a");
+            find.enemy = true;
+                find.findNearest();
+                objCond = find.foundObj;
+            }
+            else if (logicArray.logic[i, 0] == 2)//set object(condition) to nearest ally
+            {
+                find.enemy = false;
+                find.findNearest();
+                objCond = find.foundObj;
+            }
 
-        if (logic[1] == 0)//return true always
-        {
-            proceed = true;
-            return proceed;
-        }
-        else if (logic[1] == 1)//return true if object(condition) has less than set health
-        {
-            proceed = true;
-            return proceed;
-        }
-        else if (logic[1] == 2)//return true if object(condition) has more than set health
-        {
-            proceed = false;
-            return proceed;
-        }
-        print(proceed);
+            if (logicArray.logic[i, 1] == 0)//return true always
+            {
+                proceed = true;
+                return proceed;
+            }
+            else if (logicArray.logic[i, 1] == 1)//return true if object(condition) has less than set health
+            {
+                if (objCond.GetComponent<Health>().percentHealth < logicArray.logic[i, 2])
+                {
+                    proceed = true;
+                    return proceed;
+
+                }
+            }
+            else if (logicArray.logic[i, 1] == 2)//return true if object(condition) has more than set health
+            {
+                if (objCond.GetComponent<Health>().percentHealth > logicArray.logic[i, 2])
+                {
+                    proceed = true;
+                    return proceed;
+                }
+            }
+            else
+            {
+                proceed = false;
+            }
         return proceed;
     }
 
-/// <summary>
-/// ACTION
-/// </summary>
+    /// <summary>
+    /// ACTION PERFORMED IF CHECK RETURNS TRUE, ALSO CHECKS IF ACTION CAN BE PERFORMED
+    /// </summary>
 
     void Action()
     {
-        print("Action");
+        if (logicArray.logic[i,3] == 0)//set object(action) to self
+        {
+            objAct = gameObject;
+        }
+        else if (logicArray.logic[i,3] == 1)//set object(action) to nearest enemy
+        {
+            find.enemy = true;
+            find.findNearest();
+            objAct = find.foundObj;
+        }
+        else if (logicArray.logic[i,3] == 2)//set object(action) to nearest ally
+        {
+            find.enemy = false;
+            find.findNearest();
+            objAct = find.foundObj;
+        }
+        else if (logicArray.logic[i, 3] == 3)//set object(action) to allied base
+        {
+            find.enemy = true;
+            find.findNearestBase();
+            objAct = find.foundObj;
+        }
+
+        if (logicArray.logic[i,4] == 0)
+        {
+            gameObject.GetComponent<Target>().enabled = true;
+            gameObject.GetComponent<Move>().enabled = true;
+            gameObject.GetComponent<Attack>().enabled = true;
+        }
+        if (logicArray.logic[i,4] == 1)
+        {
+            gameObject.GetComponent<Target>().enabled = true;
+            gameObject.GetComponent<Move>().enabled = true;
+            gameObject.GetComponent<Attack>().enabled = false;
+        }
+        i = 0;
     }
 }

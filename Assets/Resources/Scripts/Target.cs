@@ -4,21 +4,22 @@ using System.Collections;
 public class Target : MonoBehaviour {
 
     public GameObject target;
-    public FindNearestEnemy findNearestEnemy;
+    public Find find;
     public Vector2 targetVector;
     public Vector2 unitVector;
     public float targetDistance;
     public float range;
     public float sightRange;
+    private ParseLogicArray parseLogicArray;
 
     void Awake()
     {
-        findNearestEnemy = GetComponent<FindNearestEnemy>();
+        find = GetComponent<Find>();
+        parseLogicArray = GetComponent<ParseLogicArray>();
     }
     void Update()
     {
-
-        target = findNearestEnemy.closest;
+        target = parseLogicArray.objAct;
     }
 
     void FixedUpdate ()

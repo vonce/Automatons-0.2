@@ -3,17 +3,29 @@ using System.Collections;
 
 public class Find : MonoBehaviour {
 
-    public GameObject nearest;
+    public GameObject foundObj;
+    private GameObject nearest;
     private Target target;
     private GameObject temp;
     public bool enemy;
 
-    void Awake ()
+    //temp
+    public void findNearestBase()
     {
-        target = GetComponent<Target>();
-    }
 
-    void findNearest()
+            if (gameObject.tag == "Blue")
+            {
+            foundObj = GameObject.Find("Blue_Command");
+            }
+            if (gameObject.tag == "Red")
+            {
+            foundObj = GameObject.Find("Red_Command");
+            }
+
+    }
+    //temp
+
+    public void findNearest()
     {
         GameObject[] temp = null;
         if (enemy == true)
@@ -39,7 +51,7 @@ public class Find : MonoBehaviour {
             }
         }
 
-        float distance = target.sightRange;
+        float distance = Mathf.Infinity;
             Vector2 position = transform.position;
             foreach (GameObject i in temp)
             {
@@ -47,9 +59,14 @@ public class Find : MonoBehaviour {
                 float curDistance = diff.sqrMagnitude;
                 if (curDistance < distance)
                 {
-                    nearest = i;
+                    if (i != gameObject)
+                    {
+                        nearest = i;
+                    }
+
                     distance = curDistance;
                 }
             }
+        foundObj = nearest;
         }
 }

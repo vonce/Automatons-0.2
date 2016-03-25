@@ -3,22 +3,26 @@ using System.Collections;
 
 public class LogicArray : MonoBehaviour {
 
-    public int[] logic;
-    public enum Object : int {Self = 0, NearestEnemy = 1, NearestAlly = 2}; //enum for objects for logic matrix
-    public Object obj;
-    public enum Condition : int { Always = 0,  LessThanHealth = 1, MoreThanHealth = 2}; //enum for conditions for logic matrix
-    public Condition cond;
-    public int subCond;
-    public Object objAct;
-    public enum Action : int { Attack = 0, Flee = 1, Special = 2};//enum for actions for logic matrix
-    public Action act;
+    public int[,] logic = new int[2, 5];
+    public int rows;
 
+    void Start()
+    {
+
+        logic[0, 0] = 0;//self
+        logic[0, 1] = 1;//less than
+        logic[0, 2] = 30;//30 percent
+        logic[0, 3] = 3;//nearest base
+        logic[0, 4] = 1;//flee
+
+        logic[1, 0] = 1;//nearest enemy
+        logic[1, 1] = 0;//always
+        logic[1, 2] = 30;//30 percent
+        logic[1, 3] = 1;//nearest base
+        logic[1, 4] = 0;//attack
+    }
     void Update()
     {
-        logic[0] = (int)obj;
-        logic[1] = (int)cond;
-        logic[2] = subCond;
-        logic[3] = (int)objAct;
-        logic[4] = (int)act;
+
     }
 }

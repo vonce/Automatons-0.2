@@ -11,7 +11,7 @@ public class Move : MonoBehaviour {
 	}
 
 	void Update () {
-        if (target.range < target.targetDistance)
+        if (target.sightRange > target.targetDistance && target.range < target.targetDistance)
         {
             transform.position = Vector2.MoveTowards(transform.position, target.targetVector, speed * Time.deltaTime);
         }

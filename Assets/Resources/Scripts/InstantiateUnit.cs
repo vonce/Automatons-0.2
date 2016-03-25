@@ -14,7 +14,7 @@ public class InstantiateUnit : MonoBehaviour
     void Awake()
     {
         logicArray = GetComponent<LogicArray>();
-        nextUnit = 10.0F;
+        nextUnit = 0.0F;
         unitRate = 10.0F;
     }
 
@@ -24,7 +24,15 @@ public class InstantiateUnit : MonoBehaviour
         {
             nextUnit = Time.time + unitRate;
             Unit = Instantiate(UnitPrefab, Front.position, Front.rotation) as GameObject;
-            Unit.GetComponent<UnitLogicArray>().logic = logicArray.logic;
+            Unit.GetComponent<UnitLogicArray>().logic = new int[logicArray.rows , 5];
+            Unit.GetComponent<UnitLogicArray>().rows = logicArray.rows;
+            for (int i = 0; i < logicArray.rows; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    Unit.GetComponent<UnitLogicArray>().logic[i,j] = logicArray.logic[i,j];
+                }//passes logic array from BUILDING(LogicArray) to UNIT(UnitLogicArray)
+            }
         }
     }
 }

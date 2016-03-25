@@ -3,22 +3,24 @@ using System.Collections;
 
 public class Health : MonoBehaviour {
 
-    public float maxhealth;
-    public float currenthealth;
+    public float maxHealth;
+    public float currentHealth;
+    public float percentHealth;
     public GameObject healthBar;
     public GameObject bullet;
+    private float calcHealth;
 
 
     void Start()
     {
-        currenthealth = maxhealth;
-        float calcHealth = currenthealth / maxhealth;
+        currentHealth = maxHealth;
+        float calcHealth = currentHealth / maxHealth;
         SetHealthBar(calcHealth);
     }
 
     void OnTriggerEnter2D(Collider2D bullet)//trigger events
     {
-        --currenthealth;
+        --currentHealth;
     }
 
     public void SetHealthBar(float myHealth)
@@ -28,10 +30,10 @@ public class Health : MonoBehaviour {
 
     void Update()
     {
-
-        float calcHealth = currenthealth / maxhealth;
+        calcHealth = currentHealth / maxHealth;
+        percentHealth = calcHealth * 100;
         SetHealthBar(calcHealth);
-        if (currenthealth <= 0)
+        if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }
