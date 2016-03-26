@@ -9,20 +9,23 @@ public class Attack : MonoBehaviour {
     private float nextFire;
     Rigidbody2D Bullet;
     private Target target;
+    private Status status;
 
     void Awake(){
         target = GetComponent<Target>();
+        status = GetComponent<Status>();
         nextFire = Time.time + fireRate;
     }
 
     void Update(){
-        if (target.range > target.targetDistance && Time.time > nextFire)
+        if (status.range < target.targetDistance)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.targetVector, status.speed * Time.deltaTime);
+        }
+        if (status.range > target.targetDistance && Time.time > nextFire)
         {
             Bullet = Instantiate(BulletPrefab, Front.position, Front.rotation) as Rigidbody2D;
             nextFire = Time.time + fireRate;
         }
     }
-
-
-
 }

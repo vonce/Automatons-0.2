@@ -5,4 +5,9 @@ public class UnitLogicArray : MonoBehaviour {
 
     public int[,] logic;
     public int rows;
+
+    void Update()
+    {
+
+    }
 }

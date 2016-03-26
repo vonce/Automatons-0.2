@@ -7,7 +7,9 @@ public class Heal : MonoBehaviour {
     private GameObject[] temp;
     private float nextHeal;
 
-	void Update () {
+    float distance = 100;
+
+    void Update () {
         if (gameObject.tag == "Red")
         {
             temp = GameObject.FindGameObjectsWithTag("Red");
@@ -16,17 +18,18 @@ public class Heal : MonoBehaviour {
         {
             temp = GameObject.FindGameObjectsWithTag("Blue");
         }
-        float distance = 100;
-        foreach (GameObject i in temp)
+        if (Time.time > nextHeal)
         {
-            Vector2 diff = i.transform.position - transform.position;
-            float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance && i.GetComponent<Health>().currentHealth < i.GetComponent<Health>().maxHealth && Time.time > nextHeal)
+            foreach (GameObject i in temp)
             {
-                ++i.GetComponent<Health>().currentHealth;
-                nextHeal = Time.time + healRate;
+                Vector2 diff = i.transform.position - transform.position;
+                float curDistance = diff.sqrMagnitude;
+                if (curDistance < distance && i.GetComponent<Health>().currentHealth < i.GetComponent<Health>().maxHealth)
+                {
+                    i.GetComponent<Health>().currentHealth = i.GetComponent<Health>().currentHealth + 5;
+                    nextHeal = Time.time + healRate;
+                }
             }
         }
-
     }
 }

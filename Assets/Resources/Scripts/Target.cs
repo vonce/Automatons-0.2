@@ -8,18 +8,36 @@ public class Target : MonoBehaviour {
     public Vector2 targetVector;
     public Vector2 unitVector;
     public float targetDistance;
-    public float range;
-    public float sightRange;
     private ParseLogicArray parseLogicArray;
 
     void Awake()
     {
         find = GetComponent<Find>();
         parseLogicArray = GetComponent<ParseLogicArray>();
+        if (gameObject.tag == "Red")
+        {
+            target = GameObject.Find("Blue_Command");
+        }
+        if (gameObject.tag == "Blue")
+        {
+            target = GameObject.Find("Red_Command");
+        }
     }
     void Update()
     {
         target = parseLogicArray.objAct;
+
+        if (target == null)
+        {
+            if (gameObject.tag == "Red")
+            {
+                target = GameObject.Find("Blue_Command");
+            }
+            if (gameObject.tag == "Blue")
+            {
+                target = GameObject.Find("Red_Command");
+            }
+        }
     }
 
     void FixedUpdate ()
@@ -29,16 +47,13 @@ public class Target : MonoBehaviour {
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         //faces target
 
-        Vector2 temp = new Vector2(transform.position.x, transform.position.y);
-        unitVector = temp;
+        unitVector = new Vector2(transform.position.x, transform.position.y);
         //stores coordinates of unit in "unitVector"
 
-        Vector2 tempv = new Vector2(target.transform.position.x, target.transform.position.y);
-        targetVector = tempv;
+        targetVector = new Vector2(target.transform.position.x, target.transform.position.y);
         //stores coordinates of target in "targetVector"
 
-        float tempf = Vector2.Distance(targetVector, unitVector);
-        targetDistance = tempf;
+        targetDistance = Vector2.Distance(targetVector, unitVector);
         //stores distance in "targetDistance"
 
     }

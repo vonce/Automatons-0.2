@@ -20,11 +20,11 @@ public class ParseLogicArray : MonoBehaviour {
         MonoBehaviour[] scripts = gameObject.GetComponents<MonoBehaviour>();
         foreach (MonoBehaviour script in scripts)
         {
-            if (script != find && script != logicArray && script != gameObject.GetComponent<ParseLogicArray>() && script != gameObject.GetComponent<Health>())
-                script.enabled = false;//turns off all scripts except find, unit logic array, parse logic array, and health
+            if (script != find && script != logicArray && script != gameObject.GetComponent<ParseLogicArray>() && script != gameObject.GetComponent<Status>() && script != gameObject.GetComponent<Health>())
+                script.enabled = false;//turns off all scripts except find, unit logic array, parse logic array, status, and health
         }
         i = 0;
-        checkRate = 1;
+        checkRate = 0.1f;
     }
 
     void Update()
@@ -52,12 +52,10 @@ public class ParseLogicArray : MonoBehaviour {
         proceed = false;
             if (logicArray.logic[i, 0] == 0)//set object(condition) to self
             {
-            print("asdf");
                 objCond = gameObject;
             }
             else if (logicArray.logic[i, 0] == 1)//set object(condition) to nearest enemy
             {
-            print("a");
             find.enemy = true;
                 find.findNearest();
                 objCond = find.foundObj;
@@ -122,6 +120,12 @@ public class ParseLogicArray : MonoBehaviour {
         }
         else if (logicArray.logic[i, 3] == 3)//set object(action) to allied base
         {
+            find.enemy = false;
+            find.findNearestBase();
+            objAct = find.foundObj;
+        }
+        else if (logicArray.logic[i, 3] == 4)//set object(action) to enemy base
+        {
             find.enemy = true;
             find.findNearestBase();
             objAct = find.foundObj;
@@ -130,7 +134,7 @@ public class ParseLogicArray : MonoBehaviour {
         if (logicArray.logic[i,4] == 0)
         {
             gameObject.GetComponent<Target>().enabled = true;
-            gameObject.GetComponent<Move>().enabled = true;
+            gameObject.GetComponent<Move>().enabled = false;
             gameObject.GetComponent<Attack>().enabled = true;
         }
         if (logicArray.logic[i,4] == 1)

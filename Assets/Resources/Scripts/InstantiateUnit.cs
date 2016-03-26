@@ -8,14 +8,14 @@ public class InstantiateUnit : MonoBehaviour
     GameObject Unit;
     public Transform Front;
     private float nextUnit;
-    private float unitRate;
+    public float unitRate;
     private LogicArray logicArray;
 
     void Awake()
     {
         logicArray = GetComponent<LogicArray>();
         nextUnit = 0.0F;
-        unitRate = 10.0F;
+        unitRate = 20.0F;
     }
 
     void Update()
@@ -26,13 +26,15 @@ public class InstantiateUnit : MonoBehaviour
             Unit = Instantiate(UnitPrefab, Front.position, Front.rotation) as GameObject;
             Unit.GetComponent<UnitLogicArray>().logic = new int[logicArray.rows , 5];
             Unit.GetComponent<UnitLogicArray>().rows = logicArray.rows;
-            for (int i = 0; i < logicArray.rows; i++)
+
+            for (int i = 0; i < logicArray.rows; i++)//3 should be row eventually
             {
                 for (int j = 0; j < 5; j++)
                 {
                     Unit.GetComponent<UnitLogicArray>().logic[i,j] = logicArray.logic[i,j];
                 }//passes logic array from BUILDING(LogicArray) to UNIT(UnitLogicArray)
             }
+
         }
     }
 }

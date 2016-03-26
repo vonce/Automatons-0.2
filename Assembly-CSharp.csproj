@@ -49,7 +49,6 @@
      <Compile Include="Assets\Heal.cs" />
      <Compile Include="Assets\Homing.cs" />
      <Compile Include="Assets\Resources\Scripts\Attack.cs" />
-     <Compile Include="Assets\Resources\Scripts\Attack2.cs" />
      <Compile Include="Assets\Resources\Scripts\Find.cs" />
      <Compile Include="Assets\Resources\Scripts\FindNearestEnemy.cs" />
      <Compile Include="Assets\Resources\Scripts\Health.cs" />
@@ -58,7 +57,11 @@
      <Compile Include="Assets\Resources\Scripts\Logic\ParseLogicArray.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\UnitLogicArray.cs" />
      <Compile Include="Assets\Resources\Scripts\Move.cs" />
+     <Compile Include="Assets\Resources\Scripts\Resources.cs" />
+     <Compile Include="Assets\Resources\Scripts\Status.cs" />
      <Compile Include="Assets\Resources\Scripts\Target.cs" />
+     <Compile Include="Assets\Resources\Scripts\UI\SelectManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\UI\UIselected.cs" />
      <Compile Include="Assets\Resources\Scripts\Unit.cs" />
      <Compile Include="Assets\bullet\Destruct.cs" />
      <Compile Include="Assets\bullet\Forward.cs" />
