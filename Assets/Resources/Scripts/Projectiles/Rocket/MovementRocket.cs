@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Forward : MonoBehaviour {
+public class MovementRocket : MonoBehaviour {
 
     public float speed;
     public Transform Front;
 
-	void Update (){
+    void Update()
+    {
         transform.position = Vector2.MoveTowards(transform.position, Front.position, speed * Time.deltaTime);
     }
 }

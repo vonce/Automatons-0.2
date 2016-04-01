@@ -3,42 +3,13 @@ using System.Collections;
 
 public class Find : MonoBehaviour {
 
-    public GameObject foundObj;
     public bool enemy;
+    public int unitType;
     private GameObject nearest;
     private Target target;
     private GameObject temp;
-    private Status status;
 
-    //temp
-    public void findNearestBase()
-    {
-        if (enemy == true)
-        {
-            if (gameObject.tag == "Red")
-            {
-                foundObj = GameObject.Find("Blue_Command");
-            }
-            if (gameObject.tag == "Blue")
-            {
-                foundObj = GameObject.Find("Red_Command");
-            }
-        }
-        if (enemy == false)
-        {
-            if (gameObject.tag == "Blue")
-            {
-                foundObj = GameObject.Find("Blue_Command");
-            }
-            if (gameObject.tag == "Red")
-            {
-                foundObj = GameObject.Find("Red_Command");
-            }
-        }
-    }
-    //temp
-
-    public void findNearest()
+    public GameObject Nearest(bool enemy, int unitType)
     {
         GameObject[] temp = null;
         if (enemy == true)
@@ -66,21 +37,28 @@ public class Find : MonoBehaviour {
 
         float distance = Mathf.Infinity;
             Vector2 position = transform.position;
+
             foreach (GameObject i in temp)
             {
                 Vector2 diff = i.transform.position - transform.position;
                 float curDistance = diff.sqrMagnitude;
-            //print(curDistance);
-            //print(distance);
             if (curDistance < distance)
                 {
                     if (i != gameObject)
                     {
-                        nearest = i;
-                    }
-                    distance = curDistance;
-                foundObj = nearest;
+                    if (unitType == -1)
+                        {                            
+                            nearest = i;
+                            distance = curDistance;
+                        }
+                        if(unitType == (int)i.GetComponent<Status>().unitType)
+                        {
+                            nearest = i;
+                            distance = curDistance;
+                        }
+                    }                    
                 }
             }
+        return nearest;
     }
 }

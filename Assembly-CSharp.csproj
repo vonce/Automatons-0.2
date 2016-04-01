@@ -48,23 +48,26 @@
      <Compile Include="Assets\Allied.cs" />
      <Compile Include="Assets\Heal.cs" />
      <Compile Include="Assets\Homing.cs" />
-     <Compile Include="Assets\Resources\Scripts\Attack.cs" />
-     <Compile Include="Assets\Resources\Scripts\Find.cs" />
+     <Compile Include="Assets\Resources\Scripts\Action\Attack.cs" />
+     <Compile Include="Assets\Resources\Scripts\Action\Find.cs" />
+     <Compile Include="Assets\Resources\Scripts\Action\Move.cs" />
+     <Compile Include="Assets\Resources\Scripts\Action\Special.cs" />
      <Compile Include="Assets\Resources\Scripts\FindNearestEnemy.cs" />
      <Compile Include="Assets\Resources\Scripts\Health.cs" />
      <Compile Include="Assets\Resources\Scripts\InstantiateUnit.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\LogicArray.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\ParseLogicArray.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\UnitLogicArray.cs" />
-     <Compile Include="Assets\Resources\Scripts\Move.cs" />
+     <Compile Include="Assets\Resources\Scripts\Projectiles\Rocket\DestructRocket.cs" />
+     <Compile Include="Assets\Resources\Scripts\Projectiles\Rocket\MovementRocket.cs" />
+     <Compile Include="Assets\Resources\Scripts\Projectiles\bullet\DestructBullet.cs" />
+     <Compile Include="Assets\Resources\Scripts\Projectiles\bullet\MovementBullet.cs" />
      <Compile Include="Assets\Resources\Scripts\Resources.cs" />
      <Compile Include="Assets\Resources\Scripts\Status.cs" />
      <Compile Include="Assets\Resources\Scripts\Target.cs" />
      <Compile Include="Assets\Resources\Scripts\UI\SelectManager.cs" />
      <Compile Include="Assets\Resources\Scripts\UI\UIselected.cs" />
      <Compile Include="Assets\Resources\Scripts\Unit.cs" />
-     <Compile Include="Assets\bullet\Destruct.cs" />
-     <Compile Include="Assets\bullet\Forward.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -7,35 +7,35 @@ public class Health : MonoBehaviour {
     public float currentHealth;
     public float percentHealth;
     public GameObject healthBar;
-    public GameObject bullet;
+    private float tempHealth;
     private float calcHealth;
-
-
-    void Start()
-    {
-        currentHealth = maxHealth;
-        float calcHealth = currentHealth / maxHealth;
-        SetHealthBar(calcHealth);
-    }
-
-    void OnTriggerEnter2D(Collider2D bullet)//trigger events
-    {
-        --currentHealth;
-    }
 
     public void SetHealthBar(float myHealth)
     {
         healthBar.transform.localScale = new Vector3(myHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
     }
 
-    void Update()
+    public void FullHealth()
     {
-        calcHealth = currentHealth / maxHealth;
-        percentHealth = calcHealth * 100;
+        currentHealth = maxHealth;
+        float calcHealth = currentHealth / maxHealth;
         SetHealthBar(calcHealth);
-        if (currentHealth <= 0)
+        tempHealth = currentHealth;
+        percentHealth = calcHealth * 100;
+    }
+
+    public void HealthCheck()
+    {
+        if (tempHealth != currentHealth)
         {
-            Destroy(gameObject);
+            calcHealth = currentHealth / maxHealth;
+            percentHealth = calcHealth * 100;
+            SetHealthBar(calcHealth);
+            tempHealth = currentHealth;
+            if (currentHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

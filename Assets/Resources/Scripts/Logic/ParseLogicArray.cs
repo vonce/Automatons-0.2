@@ -20,7 +20,7 @@ public class ParseLogicArray : MonoBehaviour {
         MonoBehaviour[] scripts = gameObject.GetComponents<MonoBehaviour>();
         foreach (MonoBehaviour script in scripts)
         {
-            if (script != find && script != logicArray && script != gameObject.GetComponent<ParseLogicArray>() && script != gameObject.GetComponent<Status>() && script != gameObject.GetComponent<Health>())
+            if (script != find && script != logicArray && script != gameObject.GetComponent<ParseLogicArray>() && script != gameObject.GetComponent<Status>())
                 script.enabled = false;//turns off all scripts except find, unit logic array, parse logic array, status, and health
         }
         i = 0;
@@ -29,6 +29,7 @@ public class ParseLogicArray : MonoBehaviour {
 
     void Update()
     {
+        //print(find.Nearest(true, 0));
         if (Time.time > nextCheck)
         {
             Check();//checks conditions, returns true or false if fulfilled
@@ -56,15 +57,11 @@ public class ParseLogicArray : MonoBehaviour {
             }
             else if (logicArray.logic[i, 0] == 1)//set object(condition) to nearest enemy
             {
-            find.enemy = true;
-                find.findNearest();
-                objCond = find.foundObj;
+                objCond = find.Nearest(true, -1);
             }
             else if (logicArray.logic[i, 0] == 2)//set object(condition) to nearest ally
             {
-                find.enemy = false;
-                find.findNearest();
-                objCond = find.foundObj;
+                objCond = find.Nearest(false, -1);
             }
 
             if (logicArray.logic[i, 1] == 0)//return true always
@@ -74,16 +71,15 @@ public class ParseLogicArray : MonoBehaviour {
             }
             else if (logicArray.logic[i, 1] == 1)//return true if object(condition) has less than set health
             {
-                if (objCond.GetComponent<Health>().percentHealth < logicArray.logic[i, 2])
+                if (objCond.GetComponent<Status>().percentHealth < logicArray.logic[i, 2])
                 {
                     proceed = true;
                     return proceed;
-
                 }
             }
             else if (logicArray.logic[i, 1] == 2)//return true if object(condition) has more than set health
             {
-                if (objCond.GetComponent<Health>().percentHealth > logicArray.logic[i, 2])
+                if (objCond.GetComponent<Status>().percentHealth > logicArray.logic[i, 2])
                 {
                     proceed = true;
                     return proceed;
@@ -108,27 +104,19 @@ public class ParseLogicArray : MonoBehaviour {
         }
         else if (logicArray.logic[i,3] == 1)//set object(action) to nearest enemy
         {
-            find.enemy = true;
-            find.findNearest();
-            objAct = find.foundObj;
+            objAct = find.Nearest(true, -1);
         }
         else if (logicArray.logic[i,3] == 2)//set object(action) to nearest ally
         {
-            find.enemy = false;
-            find.findNearest();
-            objAct = find.foundObj;
+            objAct = find.Nearest(false, -1);
         }
         else if (logicArray.logic[i, 3] == 3)//set object(action) to allied base
         {
-            find.enemy = false;
-            find.findNearestBase();
-            objAct = find.foundObj;
+            objAct = find.Nearest(false, 0);
         }
         else if (logicArray.logic[i, 3] == 4)//set object(action) to enemy base
         {
-            find.enemy = true;
-            find.findNearestBase();
-            objAct = find.foundObj;
+            objAct = find.Nearest(true, 0);
         }
 
         if (logicArray.logic[i,4] == 0)
@@ -136,12 +124,21 @@ public class ParseLogicArray : MonoBehaviour {
             gameObject.GetComponent<Target>().enabled = true;
             gameObject.GetComponent<Move>().enabled = false;
             gameObject.GetComponent<Attack>().enabled = true;
+            gameObject.GetComponent<Special>().enabled = false;
         }
         if (logicArray.logic[i,4] == 1)
         {
             gameObject.GetComponent<Target>().enabled = true;
             gameObject.GetComponent<Move>().enabled = true;
             gameObject.GetComponent<Attack>().enabled = false;
+            gameObject.GetComponent<Special>().enabled = false;
+        }
+        if (logicArray.logic[i, 4] == 2)
+        {
+            gameObject.GetComponent<Target>().enabled = true;
+            gameObject.GetComponent<Move>().enabled = false;
+            gameObject.GetComponent<Attack>().enabled = false;
+            gameObject.GetComponent<Special>().enabled = true;
         }
         i = 0;
     }

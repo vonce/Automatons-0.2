@@ -15,9 +15,9 @@ public class LogicArray : MonoBehaviour {
             for (int j = 0; j < 5; j++)
             {
                 logic[i, j] = 0;
+                logic[i, 3] = 1;
             }
         }
-        logic[0, 3] = 1;
     }
 }
 

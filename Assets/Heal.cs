@@ -4,10 +4,9 @@ using System.Collections;
 public class Heal : MonoBehaviour {
 
     public float healRate;
+    public float healDistance;
     private GameObject[] temp;
     private float nextHeal;
-
-    float distance = 100;
 
     void Update () {
         if (gameObject.tag == "Red")
@@ -23,10 +22,25 @@ public class Heal : MonoBehaviour {
             foreach (GameObject i in temp)
             {
                 Vector2 diff = i.transform.position - transform.position;
-                float curDistance = diff.sqrMagnitude;
-                if (curDistance < distance && i.GetComponent<Health>().currentHealth < i.GetComponent<Health>().maxHealth)
+                float curDistance = diff.magnitude;
+                if (curDistance < healDistance && i.GetComponent<Status>().currentHealth < i.GetComponent<Status>().maxHealth)
                 {
-                    i.GetComponent<Health>().currentHealth = i.GetComponent<Health>().currentHealth + 5;
+                    if(i.GetComponent<Status>().maxHealth - i.GetComponent<Status>().currentHealth < 5)
+                    {
+                        i.GetComponent<Status>().currentHealth = i.GetComponent<Status>().maxHealth;
+                    }
+                    else
+                    {
+                        i.GetComponent<Status>().currentHealth = i.GetComponent<Status>().currentHealth + 5;
+                    }
+                    if (10 - i.GetComponent<Status>().special < 5)
+                    {
+                        i.GetComponent<Status>().special = 10;
+                    }
+                    else
+                    {
+                        i.GetComponent<Status>().special = i.GetComponent<Status>().special + 5;
+                    }
                     nextHeal = Time.time + healRate;
                 }
             }
