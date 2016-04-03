@@ -15,7 +15,6 @@ public class InstantiateUnit : MonoBehaviour
     {
         logicArray = GetComponent<LogicArray>();
         nextUnit = 0.0F;
-        unitRate = 20.0F;
     }
 
     void Update()
@@ -27,7 +26,7 @@ public class InstantiateUnit : MonoBehaviour
             Unit.GetComponent<UnitLogicArray>().logic = new int[logicArray.rows , 5];
             Unit.GetComponent<UnitLogicArray>().rows = logicArray.rows;
 
-            for (int i = 0; i < logicArray.rows; i++)//3 should be row eventually
+            for (int i = 0; i < logicArray.rows; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {

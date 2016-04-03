@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Allied.cs" />
+     <Compile Include="Assets\Build.cs" />
      <Compile Include="Assets\Heal.cs" />
      <Compile Include="Assets\Homing.cs" />
      <Compile Include="Assets\Resources\Scripts\Action\Attack.cs" />
