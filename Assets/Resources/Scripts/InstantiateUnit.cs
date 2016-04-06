@@ -22,7 +22,7 @@ public class InstantiateUnit : MonoBehaviour
         if (Time.time > nextUnit)
         {
             nextUnit = Time.time + unitRate;
-            Unit = Instantiate(UnitPrefab, Front.position, Front.rotation) as GameObject;
+            Unit = Instantiate(UnitPrefab, Front.position, Quaternion.identity) as GameObject;
             Unit.GetComponent<UnitLogicArray>().logic = new int[logicArray.rows , 5];
             Unit.GetComponent<UnitLogicArray>().rows = logicArray.rows;
 

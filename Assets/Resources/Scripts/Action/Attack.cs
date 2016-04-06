@@ -7,24 +7,30 @@ public class Attack : MonoBehaviour {
     public float fireRate;
     public Transform Front;
     private float nextFire;
-    Rigidbody2D Bullet;
+    Rigidbody2D bullet;
     private Target target;
     private Status status;
+    private Move move;
+    private Vector2 bulletVector;
 
     void Awake(){
         target = GetComponent<Target>();
         status = GetComponent<Status>();
+        move = GetComponent<Move>();
         nextFire = Time.time + fireRate;
     }
 
     void Update(){
         if (status.range < target.targetDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.targetVector, status.speed * Time.deltaTime);
+            move.MoveTo(target.target);
         }
         if (status.range > target.targetDistance && Time.time > nextFire)
         {
-            Bullet = Instantiate(BulletPrefab, Front.position, Front.rotation) as Rigidbody2D;
+            bulletVector = gameObject.transform.position - target.target.transform.position;
+            bullet = Instantiate(BulletPrefab, Front.position, Front.rotation) as Rigidbody2D;
+            bullet.AddForce(bulletVector.normalized * -500, ForceMode2D.Force);
+
             nextFire = Time.time + fireRate;
         }
     }

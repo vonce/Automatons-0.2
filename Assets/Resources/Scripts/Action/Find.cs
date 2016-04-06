@@ -46,15 +46,19 @@ public class Find : MonoBehaviour {
                 {
                     if (i != gameObject)
                     {
-                    if (unitType == -1)
+                        if (unitType == -1)
                         {                            
                             nearest = i;
                             distance = curDistance;
                         }
-                        if(unitType == (int)i.GetComponent<Status>().unitType)
+                        else if(unitType == (int)i.GetComponent<Status>().unitType)
                         {
                             nearest = i;
                             distance = curDistance;
+                        }
+                        else
+                        {
+                            
                         }
                     }                    
                 }

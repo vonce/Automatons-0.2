@@ -3,18 +3,21 @@ using System.Collections;
 
 public class Special : MonoBehaviour{
 
-    public Rigidbody2D RocketPrefab;
+    public Rigidbody2D rocketPrefab;
     public float fireRate;
     public Transform Front;
     private float nextFire;
-    Rigidbody2D Rocket;
+    private Move move;
+    Rigidbody2D rocket;
     private Target target;
     private Status status;
+    private Vector2 rocketVector;
 
     void Awake()
     {
         target = GetComponent<Target>();
         status = GetComponent<Status>();
+        move = GetComponent<Move>();
         nextFire = Time.time + fireRate;
     }
 
@@ -22,12 +25,13 @@ public class Special : MonoBehaviour{
     {
         if (status.range < target.targetDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target.targetVector, status.speed * Time.deltaTime);
+            move.MoveTo(target.target);
         }
         if (status.range > target.targetDistance && Time.time > nextFire && status.special >= 5)
         {
-            Rocket = Instantiate(RocketPrefab, Front.position, Front.rotation) as Rigidbody2D;
-            nextFire = Time.time + fireRate;
+            rocketVector = gameObject.transform.position - target.target.transform.position;
+            rocket = Instantiate(rocketPrefab, Front.position, Front.rotation) as Rigidbody2D;
+            rocket.AddForce(rocketVector.normalized * -750, ForceMode2D.Force);
 
             status.special = status.special - 5;
         }
