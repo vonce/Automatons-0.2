@@ -17,12 +17,7 @@ public class ParseLogicArray : MonoBehaviour {
         find = GetComponent<Find>();
         logicArray = GetComponent<UnitLogicArray>();
 
-        MonoBehaviour[] scripts = gameObject.GetComponents<MonoBehaviour>();
-        foreach (MonoBehaviour script in scripts)
-        {
-            if (script != find && script != logicArray && script != gameObject.GetComponent<ParseLogicArray>() && script != gameObject.GetComponent<Status>())
-                script.enabled = false;//turns off all scripts except find, unit logic array, parse logic array, status, and health
-        }
+		DisableScript ();
         i = 0;
         checkRate = 0.1f;
     }
@@ -121,25 +116,32 @@ public class ParseLogicArray : MonoBehaviour {
 
         if (logicArray.logic[i,4] == 0)
         {
+			DisableScript ();
             gameObject.GetComponent<Target>().enabled = true;
-            gameObject.GetComponent<Move>().enabled = false;
             gameObject.GetComponent<Attack>().enabled = true;
-            gameObject.GetComponent<Special>().enabled = false;
         }
         if (logicArray.logic[i,4] == 1)
         {
+			DisableScript ();
             gameObject.GetComponent<Target>().enabled = true;
             gameObject.GetComponent<Move>().enabled = true;
-            gameObject.GetComponent<Attack>().enabled = false;
-            gameObject.GetComponent<Special>().enabled = false;
         }
         if (logicArray.logic[i, 4] == 2)
         {
+			DisableScript ();
             gameObject.GetComponent<Target>().enabled = true;
-            gameObject.GetComponent<Move>().enabled = false;
-            gameObject.GetComponent<Attack>().enabled = false;
             gameObject.GetComponent<Special>().enabled = true;
         }
         i = 0;
     }
+
+	void DisableScript()
+	{
+		MonoBehaviour[] scripts = gameObject.GetComponents<MonoBehaviour>();
+		foreach (MonoBehaviour script in scripts)
+		{
+			if (script != find && script != logicArray && script != gameObject.GetComponent<ParseLogicArray>() && script != gameObject.GetComponent<Status>() && script != gameObject.GetComponent<Target>())
+				script.enabled = false;//turns off all scripts except find, unit logic array, parse logic array, status, health, and target
+		}
+	}
 }

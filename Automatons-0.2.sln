@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{B0E4F893-D4E0-D1BB-9E44-B56DDC46F345}") = "Automatons-0.2", "Assembly-CSharp.csproj", "{03E16C75-AC7D-C664-7701-F569B4D0B37A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03E16C75-AC7D-C664-7701-F569B4D0B37A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03E16C75-AC7D-C664-7701-F569B4D0B37A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03E16C75-AC7D-C664-7701-F569B4D0B37A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03E16C75-AC7D-C664-7701-F569B4D0B37A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
