@@ -19,7 +19,7 @@ public class ParseLogicArray : MonoBehaviour {
 
 		DisableScript ();
         i = 0;
-        checkRate = 0.1f;
+        checkRate = 0.05f;
     }
 
     void Update()
@@ -108,6 +108,8 @@ public class ParseLogicArray : MonoBehaviour {
         else if (logicArray.logic[i, 3] == 3)//set object(action) to allied base
         {
             objAct = find.Nearest(false, 0);
+            print("asdf");
+            print(find.Nearest(false, 0));
         }
         else if (logicArray.logic[i, 3] == 4)//set object(action) to enemy base
         {

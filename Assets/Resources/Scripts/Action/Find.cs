@@ -8,6 +8,13 @@ public class Find : MonoBehaviour {
     private GameObject nearest;
     private Target target;
     private GameObject temp;
+    private Status status;
+    private float distance;
+
+    void Awake()
+    {
+        status = GetComponent<Status>();
+    }
 
     public GameObject Nearest(bool enemy, int unitType)
     {
@@ -34,33 +41,36 @@ public class Find : MonoBehaviour {
                 temp = GameObject.FindGameObjectsWithTag("Red");
             }
         }
-
-        float distance = Mathf.Infinity;
+        if (unitType == 0)
+        {
+            distance = Mathf.Infinity;
+        }
+        else
+        {
+            distance = status.sightRange;
+        }
             Vector2 position = transform.position;
 
             foreach (GameObject i in temp)
             {
                 Vector2 diff = i.transform.position - transform.position;
-                float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance)
+                float curDistance = diff.magnitude;
+            if (curDistance < distance && i != gameObject)
                 {
-                    if (i != gameObject)
-                    {
-                        if (unitType == -1)
+                    if (unitType == -1)
                         {                            
                             nearest = i;
                             distance = curDistance;
                         }
-                        else if(unitType == (int)i.GetComponent<Status>().unitType)
+                    else if(unitType == (int)i.GetComponent<Status>().unitType)
                         {
                             nearest = i;
                             distance = curDistance;
                         }
-                        else
+                    else
                         {
-                            
-                        }
-                    }                    
+                            //nearest = null;
+                        }                   
                 }
             }
         return nearest;
