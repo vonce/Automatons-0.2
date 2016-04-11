@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Heal : MonoBehaviour {
-
+public class Heal : MonoBehaviour, IAction
+{
+    public bool Action(GameObject target)
+    {
+        return true;
+    }
+    /*
     public float healRate;
     public float healDistance;
     private GameObject[] temp;
@@ -46,4 +51,5 @@ public class Heal : MonoBehaviour {
             }
         }
     }
+*/
 }

@@ -1,47 +1,72 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Find : MonoBehaviour {
-
-    public bool enemy;
-    public int unitType;
+public class Find : MonoBehaviour
+{
+    /*
     private GameObject nearest;
     private Target target;
-    private GameObject temp;
+    private GameObject[] objectList;
+    private GameObject[] objectList2;
     private Status status;
     private float distance;
+    private UnitTypeE unitType;
 
     void Awake()
     {
+        GameObject[] objectList = null;
         status = GetComponent<Status>();
     }
 
-    public GameObject Nearest(bool enemy, int unitType)
+    void Update()
     {
-        GameObject[] temp = null;
-        if (enemy == true)
+
+    }
+
+    public GameObject findObject(ConditionE condition, bool enemy, UnitTypeE unitType)
+    {
         {
-            if (gameObject.tag == "Blue")
+            if (enemy == true)//checks enemy
             {
-                temp = GameObject.FindGameObjectsWithTag("Red");
+                if (gameObject.tag == "Blue")
+                {
+                    objectList = GameObject.FindGameObjectsWithTag("Red");
+                }
+                if (gameObject.tag == "Red")
+                {
+                    objectList = GameObject.FindGameObjectsWithTag("Blue");
+                }
             }
-            if (gameObject.tag == "Red")
+            else if (enemy == false)
             {
-                temp = GameObject.FindGameObjectsWithTag("Blue");
+                if (gameObject.tag == "Blue")
+                {
+                    objectList = GameObject.FindGameObjectsWithTag("Blue");
+                }
+                if (gameObject.tag == "Red")
+                {
+                    objectList = GameObject.FindGameObjectsWithTag("Red");
+                }
+            }
+            if (unitType == 0)
+            {
+                distance = Mathf.Infinity;
+            }
+            else
+            {
+                distance = status.sightRange;
             }
         }
-        else if (enemy == false)
+        //if (condition == Condition.Nearest)
         {
-            if (gameObject.tag == "Blue")
-            {
-                temp = GameObject.FindGameObjectsWithTag("Blue");
-            }
-            if (gameObject.tag == "Red")
-            {
-                temp = GameObject.FindGameObjectsWithTag("Red");
-            }
+            return Nearest();
         }
-        if (unitType == 0)
+    }
+
+
+    public GameObject Nearest()
+    {
+        if (unitType == UnitTypeE.Command)
         {
             distance = Mathf.Infinity;
         }
@@ -49,30 +74,30 @@ public class Find : MonoBehaviour {
         {
             distance = status.sightRange;
         }
-            Vector2 position = transform.position;
+        Vector2 position = transform.position;
 
-            foreach (GameObject i in temp)
-            {
-                Vector2 diff = i.transform.position - transform.position;
-                float curDistance = diff.magnitude;
+        foreach (GameObject i in objectList)
+        {
+            Vector2 diff = i.transform.position - transform.position;
+            float curDistance = diff.magnitude;
             if (curDistance < distance && i != gameObject)
+            {
+                if (unitType == UnitTypeE.Command)
                 {
-                    if (unitType == -1)
-                        {                            
-                            nearest = i;
-                            distance = curDistance;
-                        }
-                    else if(unitType == (int)i.GetComponent<Status>().unitType)
-                        {
-                            nearest = i;
-                            distance = curDistance;
-                        }
-                    else
-                        {
-                            //nearest = null;
-                        }                   
+                    nearest = i;
+                    distance = curDistance;
+                }
+                else if (unitType == i.GetComponent<Status>().unitType)
+                {
+                    nearest = i;
+                    distance = curDistance;
+                }
+                else
+                {
+                    //nearest = null;
                 }
             }
+        }
         return nearest;
-    }
+    }*/
 }

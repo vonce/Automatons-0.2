@@ -1,35 +1,29 @@
 ﻿ using UnityEngine;
 using System.Collections;
 
-public class Move : MonoBehaviour {
-
-    private Target target;
+public class Move : MonoBehaviour, IAction
+{
     private Status status;
     private Vector2 lastPos;
 
     void Awake ()
     {
-        target = GetComponent<Target>();
-        status = GetComponent<Status>();
+        Status status = GetComponent<Status>();
     }
 
-    void Update()
+    public bool Action(GameObject target)
     {
-        MoveTo(target.target);
-    }
-
-    public void MoveTo(GameObject moveTarget)
-    {
-        lastPos = transform.position;
-        transform.position = Vector2.MoveTowards(transform.position, moveTarget.transform.position, status.speed * Time.deltaTime);
-        //automatically moves towards target within range
-        if (lastPos.x - transform.position.x > 0)
+        if (target != null)
         {
-            transform.localScale = new Vector2(-1, transform.localScale.y);
+            lastPos = transform.position;
+            transform.position = Vector2.MoveTowards(transform.position, status.target.transform.position, status.speed * Time.deltaTime);
+            return true;
+            //automatically moves towards target within range
+            //create sprite script based on FACING
         }
         else
         {
-            transform.localScale = new Vector2(1, transform.localScale.y);
+            return false;
         }
     }
 }

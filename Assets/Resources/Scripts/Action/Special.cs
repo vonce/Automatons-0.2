@@ -1,21 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Special : MonoBehaviour{
-
+public class Special : MonoBehaviour, IAction
+{
+    public bool Action(GameObject target)
+    {
+        return true;
+    }
+    /*
     public Rigidbody2D rocketPrefab;
     public float fireRate;
     public Transform Front;
+    public float projectileSpeed;
     private float nextFire;
     private Move move;
     Rigidbody2D rocket;
-    private Target target;
     private Status status;
     private Vector2 rocketVector;
+    private float targetDistance;
 
     void Awake()
     {
-        target = GetComponent<Target>();
         status = GetComponent<Status>();
         move = GetComponent<Move>();
         nextFire = Time.time + fireRate;
@@ -23,17 +28,19 @@ public class Special : MonoBehaviour{
 
     void Update()
     {
-        if (status.range < target.targetDistance)
+        targetDistance = Vector2.Distance(new Vector2(status.target.transform.position.x, status.target.transform.position.y), new Vector2(transform.position.x, transform.position.y));
+        if (status.sightRange < targetDistance)
         {
-            move.MoveTo(target.target);
+            move.MoveTo(status.target);
         }
-        if (status.range > target.targetDistance && Time.time > nextFire && status.special >= 5)
+        if (status.sightRange > targetDistance && Time.time > nextFire && status.special >= 5)
         {
-            rocketVector = gameObject.transform.position - target.target.transform.position;
+            rocketVector = gameObject.transform.position - status.target.transform.position;
             rocket = Instantiate(rocketPrefab, Front.position, Front.rotation) as Rigidbody2D;
-            rocket.AddForce(rocketVector.normalized * -750, ForceMode2D.Force);
+            rocket.AddForce(-rocketVector.normalized * projectileSpeed, ForceMode2D.Force);
 
             status.special = status.special - 5;
+            nextFire = Time.time + fireRate;
         }
-    }
+    }*/
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Target : MonoBehaviour {
-
+    /*
     public GameObject target;
     public Vector2 targetVector;
     public Vector2 unitVector;
@@ -42,14 +42,8 @@ public class Target : MonoBehaviour {
     {
         if (target != null)
         {
-            unitVector = new Vector2(transform.position.x, transform.position.y);
-            //stores coordinates of unit in "unitVector"
-
-            targetVector = new Vector2(target.transform.position.x, target.transform.position.y);
-            //stores coordinates of target in "targetVector"
-
-            targetDistance = Vector2.Distance(targetVector, unitVector);
+            targetDistance = Vector2.Distance(new Vector2(target.transform.position.x, target.transform.position.y), new Vector2(transform.position.x, transform.position.y));                           
             //stores distance in "targetDistance"
         }
-    }
+    }*/
 }
