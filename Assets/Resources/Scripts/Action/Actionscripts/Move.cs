@@ -6,13 +6,15 @@ public class Move : MonoBehaviour, IAction
     private Status status;
     private Vector2 lastPos;
 
-    void Awake ()
+    void Start()
     {
-        Status status = GetComponent<Status>();
+        status = GetComponent<Status>();
     }
 
     public bool Action(GameObject target)
     {
+
+
         if (target != null)
         {
             lastPos = transform.position;

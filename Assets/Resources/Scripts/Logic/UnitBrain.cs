@@ -3,13 +3,7 @@ using System.Collections;
 
 public class UnitBrain : MonoBehaviour {
 
-    public GameObject objectCondition;
-    public GameObject objectAction;
     private Status status;
-    private enum obj { self, nearestEnemy };
-    private enum cond { always, hasLessHealth};
-    private enum act { attack, moveTo};
-    private IAction action;
 
     void Start()
     {
@@ -18,56 +12,41 @@ public class UnitBrain : MonoBehaviour {
 
     public void CheckLogicGate()
     {
-        foreach(int[] i in status.logicMatrix)
+        print("check logic gate");
+        foreach (LogicGate i in status.logicMatrix)
         {
-            if (CheckCondition(i[0], i[1], i[2]) == true)
+            if (CheckCondition(i.objectCondition, i.condition) == false)
             {
-                if (CheckAction(i[3], i[4]) == true)
+                print("1");
+            }
+            if (CheckCondition(i.objectCondition, i.condition) == true)
+            {
+                print("2");
+
+                if(CheckAction(i.objectAction, i.action) == false)
                 {
-                    Action(i[4]);
+                    print("3");
                 }
-                else
+                if (CheckAction(i.objectAction, i.action) == true)
                 {
-                    
+                    print("4");
+                    status.action = i.action;
+                    status.target = i.objectAction.Object(status);
+                    break;
                 }
             }
-            else
-            {
-                
-            }
+
         }
     }
 
-    bool CheckCondition(int objCond, int cond, int subCond)
+    bool CheckCondition(IObject objCond, ICondition cond)
     {
-        if (objCond == 1)
-        {
-            print("checkCondition OK");
-            return true;
-        }
-        else
-        {
-            print("checkCondition fail");
-            return false;
-        }
+        return cond.Condition(objCond.Object(status));
     }
 
-    bool CheckAction(int objAct, int act)
+    bool CheckAction(IObject objAct, IAction act)
     {
-        if (objAct == 4)
-        {
-            print("checkAct OK");
-            return true;
-        }
-        else
-        {
-            print("checkAct FAIL");
-            return false;
-        }
+        return act.Action(objAct.Object(status));
     }
 
-    void Action(int Act)
-    {
-
-    }
 }

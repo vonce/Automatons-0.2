@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LogicGate : MonoBehaviour {
+public class LogicGate
+{
 
     public IObject objectCondition;
-    public Condition condition;
+    public ICondition condition;
     public IAction action;
     public IObject objectAction;
 
+    public int myint;
 }

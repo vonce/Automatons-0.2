@@ -50,12 +50,13 @@
      <Compile Include="Assets\Heal.cs" />
      <Compile Include="Assets\Homing.cs" />
      <Compile Include="Assets\Resources\Scripts\Action\Action.cs" />
-     <Compile Include="Assets\Resources\Scripts\Action\Attack.cs" />
-     <Compile Include="Assets\Resources\Scripts\Action\Find.cs" />
-     <Compile Include="Assets\Resources\Scripts\Action\Move.cs" />
-     <Compile Include="Assets\Resources\Scripts\Action\Special.cs" />
+     <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Attack.cs" />
+     <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Find.cs" />
+     <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Move.cs" />
+     <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Special.cs" />
      <Compile Include="Assets\Resources\Scripts\Condition\Condition.cs" />
-     <Compile Include="Assets\Resources\Scripts\Condition\NearestEnemy.cs" />
+     <Compile Include="Assets\Resources\Scripts\Condition\Conditionscripts\Always.cs" />
+     <Compile Include="Assets\Resources\Scripts\Condition\Conditionscripts\LessThanHealth.cs" />
      <Compile Include="Assets\Resources\Scripts\FindNearestEnemy.cs" />
      <Compile Include="Assets\Resources\Scripts\InstantiateUnit.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\LogicGate.cs" />
@@ -65,6 +66,8 @@
      <Compile Include="Assets\Resources\Scripts\Logic\old logic\UnitLogicArray.cs" />
      <Compile Include="Assets\Resources\Scripts\Master.cs" />
      <Compile Include="Assets\Resources\Scripts\Object\Object.cs" />
+     <Compile Include="Assets\Resources\Scripts\Object\Objectscripts\NearestEnemy.cs" />
+     <Compile Include="Assets\Resources\Scripts\Object\Objectscripts\Self.cs" />
      <Compile Include="Assets\Resources\Scripts\Projectiles\Rocket\DestructRocket.cs" />
      <Compile Include="Assets\Resources\Scripts\Projectiles\Rocket\MovementRocket.cs" />
      <Compile Include="Assets\Resources\Scripts\Projectiles\bullet\DestructBullet.cs" />

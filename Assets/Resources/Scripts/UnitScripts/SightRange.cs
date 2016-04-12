@@ -19,14 +19,12 @@ public class SightRange : MonoBehaviour {
     {
         gameObject.GetComponentInParent<Status>().inSightRange.Add(sight.gameObject.transform.parent.gameObject);
         SightUpdate();
-        gameObject.GetComponentInParent<UnitBrain>().CheckLogicGate();
     }
 
     void OnTriggerExit2D(Collider2D notVisible)
     {
         gameObject.GetComponentInParent<Status>().inSightRange.Remove(notVisible.gameObject.transform.parent.gameObject);
         SightUpdate();
-        gameObject.GetComponentInParent<UnitBrain>().CheckLogicGate();
     }
 
     void SightUpdate()

@@ -3,6 +3,6 @@ using System.Collections;
 
 public interface IObject
 {
-    void Object(GameObject target);
+    GameObject Object(Status status);
 }
 

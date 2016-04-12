@@ -31,5 +31,6 @@ public class AttackRange : MonoBehaviour {
     void AttackUpdate()
     {
         gameObject.GetComponentInParent<Status>().inAttackRange.RemoveWhere(GameObject => GameObject == null);
+        gameObject.GetComponentInParent<UnitBrain>().CheckLogicGate();
     }
 }
