@@ -5,9 +5,8 @@ public class DestructBullet : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)//trigger events
     {
-        other.gameObject.GetComponent<Status>().currentHealth--;
+        other.gameObject.GetComponentInParent<Status>().currentHealth--;
         Destroy(gameObject);
-
     }
 
     void Update()

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ParseLogicArray : MonoBehaviour {
-
+/*
 	public GameObject objCond;
     public GameObject objAct;
     private Find find;
@@ -27,7 +27,7 @@ public class ParseLogicArray : MonoBehaviour {
         //print(find.Nearest(true, 0));
         if (Time.time > nextCheck)
         {
-            Check();//checks conditions, returns true or false if fulfilled
+            //Check();//checks conditions, returns true or false if fulfilled
             if (Check() == true)
             {
                 Action();//Acts if conditions fulfilled
@@ -52,11 +52,11 @@ public class ParseLogicArray : MonoBehaviour {
             }
             else if (logicArray.logic[i, 0] == 1)//set object(condition) to nearest enemy
             {
-                objCond = find.Nearest(true, -1);
+                objCond = find.findObject(ConditionE.Nearest, true, UnitTypeE.Command);
             }
             else if (logicArray.logic[i, 0] == 2)//set object(condition) to nearest ally
             {
-                objCond = find.Nearest(false, -1);
+                objCond = find.findObject(ConditionE.Nearest, false, UnitTypeE.Command);
             }
 
             if (logicArray.logic[i, 1] == 0)//return true always
@@ -99,21 +99,21 @@ public class ParseLogicArray : MonoBehaviour {
         }
         else if (logicArray.logic[i,3] == 1)//set object(action) to nearest enemy
         {
-            objAct = find.Nearest(true, -1);
+            objAct = find.findObject(ConditionE.Nearest, true, UnitTypeE.Command);
         }
         else if (logicArray.logic[i,3] == 2)//set object(action) to nearest ally
         {
-            objAct = find.Nearest(false, -1);
+            objAct = find.findObject(ConditionE.Nearest, false, UnitTypeE.Command);
         }
         else if (logicArray.logic[i, 3] == 3)//set object(action) to allied base
         {
-            objAct = find.Nearest(false, 0);
+            objAct = find.findObject(ConditionE.Nearest, false, UnitTypeE.Command);
             print("asdf");
-            print(find.Nearest(false, 0));
+            print(find.findObject(ConditionE.Nearest, false, UnitTypeE.Command));
         }
         else if (logicArray.logic[i, 3] == 4)//set object(action) to enemy base
         {
-            objAct = find.Nearest(true, 0);
+            objAct = find.findObject(ConditionE.Nearest, true, UnitTypeE.Command);
         }
 
         if (logicArray.logic[i,4] == 0)
@@ -146,4 +146,5 @@ public class ParseLogicArray : MonoBehaviour {
 				script.enabled = false;//turns off all scripts except find, unit logic array, parse logic array, status, health, and target
 		}
 	}
+    */
 }
