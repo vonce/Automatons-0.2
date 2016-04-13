@@ -4,8 +4,13 @@ using System;
 
 public class Always : MonoBehaviour, ICondition
 {
-public bool Condition(GameObject target)
+    public bool Condition(GameObject target)
+        {
+            return true;
+        }
+    public bool Condition(GameObject target, int percent)
     {
         return true;
     }
+
 }

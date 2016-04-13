@@ -4,25 +4,21 @@ using System.Collections.Generic;
 
 public class Status : Health
 {
-    public LogicGate[] logicMatrix;
-    public IAction action;
-    public GameObject target;
-    public UnitBuilding unitOrBuilding;
-    public HashSet<GameObject> inSightRange;
-    public HashSet<GameObject> inAttackRange;
-    public float special;
-    public float attackRange;
-    public float sightRange;
-    public float speed;
-    public UnitTypeE unitType;
-    public Vector2 facing;
-    public static int rows = 6;
+    public LogicGate[] logicMatrix;//create logic matrix
+    public IAction action;//action gameObject is taking
+    public GameObject target;//target of gameObject
+    public UnitBuildingE unitOrBuilding;//Identifies gameObject as unit or building
+    public HashSet<GameObject> inSightRange;//hashset of objects in sight range
+    public HashSet<GameObject> inAttackRange;//hashset of objects in attack range
+    public float special;//amount of special
+    public float attackRange;//attack range distance
+    public float sightRange;//sight range distance
+    public float speed;//speed 
+    public UnitTypeE unitType;//unit type enum
+    public Vector2 facing;// vector2 of which direction unit is facing
+    public static int rows = 6;// number of rows for logic matrix
 
     private LogicGate logicGate;
-    private Self self;
-    private LessThanHealth lessThanHealth;
-    private Move move;
-    private NearestEnemy nearestEnemy;
 
     void Start()
     {
@@ -31,22 +27,14 @@ public class Status : Health
         FullHealth();
 
         logicMatrix = new LogicGate[rows];
-        logicGate = new LogicGate();
-        self = gameObject.AddComponent<Self>();
-        lessThanHealth = gameObject.AddComponent<LessThanHealth>();
-        move = gameObject.AddComponent<Move>();
-        nearestEnemy = gameObject.AddComponent<NearestEnemy>();
-        logicMatrix[0] = logicGate;
-        logicMatrix[0].myint = 1;
 
-        
-
-        logicMatrix[0].objectCondition = self;
-        logicMatrix[0].condition = lessThanHealth;
-        logicMatrix[0].action = move;
-        logicMatrix[0].objectAction = nearestEnemy;
-
-        
+        foreach (LogicGate i in logicMatrix)
+        {
+            gameObject.AddComponent(i.objectCondition.GetType());
+            gameObject.AddComponent(i.condition.GetType());
+            gameObject.AddComponent(i.action.GetType());
+            gameObject.AddComponent(i.objectAction.GetType());
+        }
     }
 
     void Update()

@@ -17,7 +17,6 @@ public class NearestEnemy : MonoBehaviour, IObject
             {
                 if (i.tag == "Red")
                 {
-                    print(i);
                     enemiesList.Add(i);
                 }
             }
@@ -40,6 +39,7 @@ public class NearestEnemy : MonoBehaviour, IObject
                 nearestEnemy = i;
             }            
         }
+        print(nearestEnemy);
         return nearestEnemy;
     }
 }

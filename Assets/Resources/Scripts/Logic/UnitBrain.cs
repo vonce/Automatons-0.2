@@ -15,19 +15,19 @@ public class UnitBrain : MonoBehaviour {
         print("check logic gate");
         foreach (LogicGate i in status.logicMatrix)
         {
-            if (CheckCondition(i.objectCondition, i.condition) == false)
+            if (i.condition.Condition(i.objectCondition.Object(status)) == false)
             {
                 print("1");
             }
-            if (CheckCondition(i.objectCondition, i.condition) == true)
+            else if (i.condition.Condition(i.objectCondition.Object(status)) == true)
             {
                 print("2");
 
-                if(CheckAction(i.objectAction, i.action) == false)
+                if(i.action.Action(i.objectAction.Object(status)) == false)
                 {
                     print("3");
                 }
-                if (CheckAction(i.objectAction, i.action) == true)
+                else if (i.action.Action(i.objectAction.Object(status)) == true)
                 {
                     print("4");
                     status.action = i.action;
@@ -35,18 +35,6 @@ public class UnitBrain : MonoBehaviour {
                     break;
                 }
             }
-
         }
     }
-
-    bool CheckCondition(IObject objCond, ICondition cond)
-    {
-        return cond.Condition(objCond.Object(status));
-    }
-
-    bool CheckAction(IObject objAct, IAction act)
-    {
-        return act.Action(objAct.Object(status));
-    }
-
 }
