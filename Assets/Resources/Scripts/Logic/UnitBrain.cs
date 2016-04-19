@@ -4,36 +4,98 @@ using System.Collections;
 public class UnitBrain : MonoBehaviour {
 
     private Status status;
+    private float nextCheck;
+    private float checkRate;
 
     void Start()
     {
         status = GetComponent<Status>();
     }
 
-    public void CheckLogicGate()
+    public void CheckLogicMatrix()
     {
-        print("check logic gate");
+        print("CHECK");
         foreach (LogicGate i in status.logicMatrix)
         {
-            if (i.condition.Condition(i.objectCondition.Object(status)) == false)
+            if (CheckCondition(i.objectCondition, i.condition, i.objectConditionSubOption, i.conditionSubOption) == false)
             {
-                print("1");
+                //print(i.objectCondition + " " + i.condition + " FALSE");
             }
-            else if (i.condition.Condition(i.objectCondition.Object(status)) == true)
+            else if (CheckCondition(i.objectCondition, i.condition, i.objectConditionSubOption, i.conditionSubOption) == true)
             {
-                print("2");
-
-                if(i.action.Action(i.objectAction.Object(status)) == false)
+                //print(i.objectCondition + " " + i.condition + " TRUE");
+                if (CheckAction(i.objectAction, i.action, i.objectActionSubOption, i.actionSubOption) == false)
                 {
-                    print("3");
+                    //print(i.objectAction + " " + i.action + " FALSE");
                 }
-                else if (i.action.Action(i.objectAction.Object(status)) == true)
+                else if (CheckAction(i.objectAction, i.action, i.objectActionSubOption, i.actionSubOption) == true)
                 {
-                    print("4");
+                    //print(i.objectAction + " " + i.action + " TRUE");
                     status.action = i.action;
-                    status.target = i.objectAction.Object(status);
+                    if (i.objectActionSubOption.subOption == true)
+                    {
+                        status.target = i.objectAction.Object(status, i.objectActionSubOption);
+                    }
+                    else
+                    {
+                        status.target = i.objectAction.Object(status);
+                    }
                     break;
                 }
+            }
+        }
+
+    }
+//Checks the OBJECTCONDITION against CONDITION with optional subOptions, returns bool
+    private bool CheckCondition(IObject objectCondition, ICondition condition, SubOption objectConditionSubOption, SubOption conditionSubOption)
+    {
+        if (conditionSubOption.subOption == true)
+        {
+            if (objectConditionSubOption.subOption == true)
+            {
+                return condition.Condition(objectCondition.Object(status, objectConditionSubOption), conditionSubOption);
+            }
+            else
+            {
+                return condition.Condition(objectCondition.Object(status), conditionSubOption);
+            }
+        }
+        else
+        {
+            if (objectConditionSubOption.subOption == true)
+            {
+                return condition.Condition(objectCondition.Object(status, objectConditionSubOption));
+            }
+            else
+            {
+                return condition.Condition(objectCondition.Object(status));
+            }
+        }        
+    }
+
+//Checks the OBJECTACTION against ACTION with optional subOptions, returns bool
+    private bool CheckAction(IObject objectAction, IAction action, SubOption objectActionSubOption, SubOption actionSubOption)
+    {
+        if (actionSubOption.subOption == true)
+        {
+            if (objectActionSubOption.subOption == true)
+            {
+                return action.Action(objectAction.Object(status, objectActionSubOption), actionSubOption);
+            }
+            else
+            {
+                return action.Action(objectAction.Object(status), actionSubOption);
+            }
+        }
+        else
+        {
+            if (objectActionSubOption.subOption == true)
+            {
+                return action.Action(objectAction.Object(status, objectActionSubOption));
+            }
+            else
+            {
+                return action.Action(objectAction.Object(status));
             }
         }
     }

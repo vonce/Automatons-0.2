@@ -13,33 +13,75 @@ public class NearestEnemy : MonoBehaviour, IObject
         GameObject nearestEnemy = null;
         foreach (GameObject i in status.inSightRange)
         {
-            if (gameObject.tag == "Blue")
+            if (i != null)
             {
-                if (i.tag == "Red")
+                if (gameObject.tag == "Blue")
                 {
-                    enemiesList.Add(i);
+                    if (i.tag == "Red")
+                    {
+                        enemiesList.Add(i);
+                    }
+                }
+                if (gameObject.tag == "Red")
+                {
+                    if (i.tag == "Blue")
+                    {
+                        enemiesList.Add(i);
+                    }
                 }
             }
-            if (gameObject.tag == "Red")
+        }
+        float distance = Mathf.Infinity;
+        foreach (GameObject i in enemiesList)
+        {
+            Vector2 diff = i.transform.position - transform.position;
+            float curDistance = diff.magnitude;            
+            if (curDistance < distance)
             {
-                if (i.tag == "Blue")
+                distance = curDistance;
+                nearestEnemy = i;
+            }            
+        }
+        return nearestEnemy;
+    }
+
+    public GameObject Object(Status status, SubOption subOption)
+    {
+        enemiesList = new List<GameObject>();
+
+        GameObject nearestEnemy = null;
+        foreach (GameObject i in status.inSightRange)
+        {
+            if (i != null)
+            {
+                if (gameObject.tag == "Blue")
                 {
-                    enemiesList.Add(i);
+                    if (i.tag == "Red")
+                    {
+                        enemiesList.Add(i);
+                    }
+                }
+                if (gameObject.tag == "Red")
+                {
+                    if (i.tag == "Blue")
+                    {
+                        enemiesList.Add(i);
+                    }
                 }
             }
         }
 
+        float distance = Mathf.Infinity;
         foreach (GameObject i in enemiesList)
         {
-            float distance = status.sightRange;
             Vector2 diff = i.transform.position - transform.position;
             float curDistance = diff.magnitude;
-            if (curDistance < distance)
+            if (curDistance < distance && i.GetComponent<Status>().unitType == subOption.unitType)
             {
+                distance = curDistance;
                 nearestEnemy = i;
-            }            
+            }
         }
-        print(nearestEnemy);
         return nearestEnemy;
     }
 }

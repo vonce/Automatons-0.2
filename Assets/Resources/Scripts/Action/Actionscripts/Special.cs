@@ -7,6 +7,11 @@ public class Special : MonoBehaviour, IAction
     {
         return true;
     }
+    public bool Action(GameObject target, SubOption subOption)
+    {
+        return true;
+    }
+
     /*
     public Rigidbody2D rocketPrefab;
     public float fireRate;

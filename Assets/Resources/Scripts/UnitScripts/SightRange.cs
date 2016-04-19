@@ -17,14 +17,12 @@ public class SightRange : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D sight)
     {
-        print("ADD TO LIST");
         gameObject.GetComponentInParent<Status>().inSightRange.Add(sight.gameObject.transform.parent.gameObject);
         SightUpdate();
     }
 
     void OnTriggerExit2D(Collider2D notVisible)
     {
-        print("REMOVE FROM LIST");
         gameObject.GetComponentInParent<Status>().inSightRange.Remove(notVisible.gameObject.transform.parent.gameObject);
         SightUpdate();
     }
@@ -32,6 +30,6 @@ public class SightRange : MonoBehaviour {
     void SightUpdate()
     {       
         gameObject.GetComponentInParent<Status>().inSightRange.RemoveWhere(GameObject => GameObject == null);
-        gameObject.GetComponentInParent<UnitBrain>().CheckLogicGate();
+        gameObject.GetComponentInParent<UnitBrain>().CheckLogicMatrix();
     }
 }

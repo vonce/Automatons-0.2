@@ -13,10 +13,17 @@ public class FaceFront : MonoBehaviour {
 
     Vector2 Face(GameObject target)
     {
-        facing = new Vector2(gameObject.transform.parent.transform.position.x - target.transform.position.x, gameObject.transform.parent.transform.position.y - target.transform.position.y);
-        facing = -facing.normalized;
-        gameObject.transform.parent.GetComponent<Status>().facing = facing;
-        facing.y = facing.y / 2;
-        return facing;
+        if (target != null)
+        {
+            facing = new Vector2(gameObject.transform.parent.transform.position.x - target.transform.position.x, gameObject.transform.parent.transform.position.y - target.transform.position.y);
+            facing = -facing.normalized;
+            gameObject.transform.parent.GetComponent<Status>().facing = facing;
+            facing.y = facing.y / 2;
+            return facing;
+        }
+        else
+        {
+            return gameObject.transform.localPosition;
+        }
     }
 }

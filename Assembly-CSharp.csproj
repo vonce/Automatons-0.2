@@ -47,25 +47,28 @@
   <ItemGroup>
      <Compile Include="Assets\Build.cs" />
      <Compile Include="Assets\FaceFront.cs" />
-     <Compile Include="Assets\Heal.cs" />
      <Compile Include="Assets\Homing.cs" />
+     <Compile Include="Assets\LogicMatrixConvert.cs" />
      <Compile Include="Assets\Resources\Scripts\Action\Action.cs" />
      <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Attack.cs" />
-     <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Find.cs" />
+     <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Heal.cs" />
      <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Move.cs" />
      <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Special.cs" />
      <Compile Include="Assets\Resources\Scripts\Condition\Condition.cs" />
      <Compile Include="Assets\Resources\Scripts\Condition\Conditionscripts\Always.cs" />
      <Compile Include="Assets\Resources\Scripts\Condition\Conditionscripts\LessThanHealth.cs" />
-     <Compile Include="Assets\Resources\Scripts\FindNearestEnemy.cs" />
      <Compile Include="Assets\Resources\Scripts\InstantiateUnit.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\LogicGate.cs" />
+     <Compile Include="Assets\Resources\Scripts\Logic\SubOption.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\UnitBrain.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\old logic\LogicArray.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\old logic\ParseLogicArray.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\old logic\UnitLogicArray.cs" />
      <Compile Include="Assets\Resources\Scripts\Master.cs" />
      <Compile Include="Assets\Resources\Scripts\Object\Object.cs" />
+     <Compile Include="Assets\Resources\Scripts\Object\Objectscripts\AllyCommand.cs" />
+     <Compile Include="Assets\Resources\Scripts\Object\Objectscripts\EnemyCommand.cs" />
+     <Compile Include="Assets\Resources\Scripts\Object\Objectscripts\NearestAlly.cs" />
      <Compile Include="Assets\Resources\Scripts\Object\Objectscripts\NearestEnemy.cs" />
      <Compile Include="Assets\Resources\Scripts\Object\Objectscripts\Self.cs" />
      <Compile Include="Assets\Resources\Scripts\Projectiles\Rocket\DestructRocket.cs" />
@@ -81,6 +84,7 @@
      <Compile Include="Assets\Resources\Scripts\UnitScripts\SightRange.cs" />
      <Compile Include="Assets\Resources\Scripts\UnitScripts\Status.cs" />
      <Compile Include="Assets\Resources\Scripts\custom collider scripts\PolygonCollider2DEditor.cs" />
+     <Compile Include="Assets\TESTSCRIPTDELETE.cs" />
      <Compile Include="Assets\Target.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

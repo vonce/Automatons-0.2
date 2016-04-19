@@ -1,23 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LogicGate
+public struct LogicGate
 {
     public IObject objectCondition;
+    public SubOption objectConditionSubOption;
     public ICondition condition;
+    public SubOption conditionSubOption;
     public IAction action;
+    public SubOption actionSubOption;
     public IObject objectAction;
-
-    public enum SubOptionE { optionalInt, optionalObject };
-
-    public int percent;
-
-    public void subOptionCheck ()
-        {
-            if (objectCondition == null)//IS A CONDITION NEEDING A SUBOPTION,MAKE LIST OF THEM;
-            {
-                
-            }
-        }
-
+    public SubOption objectActionSubOption;
 }

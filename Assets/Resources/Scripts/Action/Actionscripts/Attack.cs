@@ -1,30 +1,66 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Attack : IAction
+public class Attack : MonoBehaviour, IAction
 {
-    public bool Action(GameObject target)
+    public Rigidbody2D BulletPrefab;
+    public float fireRate;
+    public Transform Front;
+    public float projectileSpeed;
+    private float nextFire;
+    private Vector2 lastPos;
+    Rigidbody2D bullet;
+    private Status status;
+    private Vector2 bulletVector;
+    private float targetDistance;
+
+    void Awake()
     {
-        return true;
+        status = GetComponent<Status>();
+        nextFire = Time.time + fireRate;
     }
 
-    /*
-        public Rigidbody2D BulletPrefab;
-        public float fireRate;
-        public Transform Front;
-        public float projectileSpeed;
-        private float nextFire;
-        Rigidbody2D bullet;
-        private Status status;
-        private Move move;
-        private Vector2 bulletVector;
-        private float targetDistance;
+    public bool Action(GameObject target)
+    {
+        if (target != null)
+        {
+            if (status.inAttackRange.Contains(target) == false)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
+            }
+            if (status.inAttackRange.Contains(target) == true && Time.time > nextFire)
+            {
+                bulletVector = gameObject.transform.position - target.transform.position;
+                bullet = Instantiate(BulletPrefab, Front.position, Front.rotation) as Rigidbody2D;
+                bullet.AddForce(-bulletVector.normalized * projectileSpeed, ForceMode2D.Force);
 
-        void Awake(){
-            status = GetComponent<Status>();
-            move = GetComponent<Move>();
-            nextFire = Time.time + fireRate;
+                nextFire = Time.time + fireRate;
+            }
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
+    public bool Action(GameObject target, SubOption subOption)
+    {
+        if (target != null)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
+            if (status.inAttackRange.Contains(target))
+            {
+                print("attack");
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /*        
 
         void Update(){
             targetDistance = Vector2.Distance(new Vector2(status.target.transform.position.x, (status.target.transform.position.y)*2), new Vector2(transform.position.x, (transform.position.y)*2));
@@ -41,5 +77,6 @@ public class Attack : IAction
 
                 nextFire = Time.time + fireRate;
             }
-        }*/
+        }
+        */
 }
