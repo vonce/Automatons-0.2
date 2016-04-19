@@ -9,11 +9,11 @@ public class InstantiateUnit : MonoBehaviour
     public Transform Front;
     private float nextUnit;
     public float unitRate;
-    private LogicArray logicArray;
+    private Status status;
 
     void Awake()
     {
-        logicArray = GetComponent<LogicArray>();
+        status = GetComponent<Status>();
         nextUnit = 0.0F;
     }
 
@@ -23,17 +23,10 @@ public class InstantiateUnit : MonoBehaviour
         {
             nextUnit = Time.time + unitRate;
             Unit = Instantiate(UnitPrefab, Front.position, Quaternion.identity) as GameObject;
-            Unit.GetComponent<UnitLogicArray>().logic = new int[logicArray.rows , 5];
-            Unit.GetComponent<UnitLogicArray>().rows = logicArray.rows;
-
-            for (int i = 0; i < logicArray.rows; i++)
+            for (int i = 0; i <=5; i++)
             {
-                for (int j = 0; j < 5; j++)
-                {
-                    Unit.GetComponent<UnitLogicArray>().logic[i,j] = logicArray.logic[i,j];
-                }//passes logic array from BUILDING(LogicArray) to UNIT(UnitLogicArray)
+                Unit.GetComponent<Status>().logicMatrix[i] = GetComponent<Status>().logicMatrix[i];
             }
-
         }
     }
 }
