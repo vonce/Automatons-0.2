@@ -7,14 +7,13 @@ public class InstantiateUnit : MonoBehaviour
     public GameObject UnitPrefab;
     GameObject Unit;
     public Transform Front;
-    private float nextUnit;
+    public float nextUnit;
     public float unitRate;
     private Status status;
 
     void Awake()
     {
         status = GetComponent<Status>();
-        nextUnit = 0.0F;
     }
 
     void Update()

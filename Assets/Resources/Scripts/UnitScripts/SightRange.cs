@@ -5,31 +5,66 @@ using System.Collections.Generic;
 public class SightRange : MonoBehaviour {
 
     private float sightRange;
-	
+    private Status status;
+    private UnitBrain unitBrain;
+    private Collider2D[] colliders;
+    private float checkRate = .1f;
+    private float nextCheck = .1f;
+
+    void Start()
+    {
+        status = GetComponentInParent<Status>();
+        unitBrain = GetComponentInParent<UnitBrain>();
+    }
+
     void Update()
     {
-        if (sightRange != gameObject.GetComponentInParent<Status>().sightRange)
+        if(Time.time > nextCheck)
         {
-            transform.localScale = new Vector2(gameObject.GetComponentInParent<Status>().sightRange, gameObject.GetComponentInParent<Status>().sightRange);
-            sightRange = (gameObject.GetComponentInParent<Status>().sightRange);
+            nextCheck = Time.time + checkRate;
+            CheckSightRange();
         }
     }
 
+    void CheckSightRange()
+    {
+        if (sightRange != status.sightRange)
+        {
+            transform.localScale = new Vector2(status.sightRange, status.sightRange);
+            sightRange = (status.sightRange);
+        }
+        colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, sightRange);
+
+        GameObject[] sightRangeArray = new GameObject[colliders.Length];
+
+        int j = 0;
+
+        foreach (Collider2D i in colliders)
+        {
+            if (i.gameObject.transform.parent.gameObject != gameObject.transform.parent.gameObject)
+            {
+                sightRangeArray[j] = i.gameObject.transform.parent.gameObject;
+                j++;
+            }
+        }
+        status.inSightRange = new HashSet<GameObject>(sightRangeArray);  
+    }
+/*
     void OnTriggerEnter2D(Collider2D sight)
     {
-        gameObject.GetComponentInParent<Status>().inSightRange.Add(sight.gameObject.transform.parent.gameObject);
+        status.inSightRange.Add(sight.gameObject.transform.parent.gameObject);
         SightUpdate();
     }
 
     void OnTriggerExit2D(Collider2D notVisible)
     {
-        gameObject.GetComponentInParent<Status>().inSightRange.Remove(notVisible.gameObject.transform.parent.gameObject);
+        status.inSightRange.Remove(notVisible.gameObject.transform.parent.gameObject);
         SightUpdate();
     }
 
     void SightUpdate()
-    {       
-        gameObject.GetComponentInParent<Status>().inSightRange.RemoveWhere(GameObject => GameObject == null);
-        gameObject.GetComponentInParent<UnitBrain>().CheckLogicMatrix();
-    }
+    {
+        status.inSightRange.RemoveWhere(GameObject => GameObject == null);
+        //unitBrain.CheckLogicMatrix();
+    }*/
 }

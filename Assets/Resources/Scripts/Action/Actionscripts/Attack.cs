@@ -20,7 +20,18 @@ public class Attack : MonoBehaviour, IAction
         nextFire = Time.time + fireRate;
     }
 
-    public bool Action(GameObject target)
+    public bool ActionCheck(GameObject target)
+    {
+        if (target != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public void Action(GameObject target)
     {
         if (target != null)
         {
@@ -36,27 +47,6 @@ public class Attack : MonoBehaviour, IAction
 
                 nextFire = Time.time + fireRate;
             }
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    public bool Action(GameObject target, SubOption subOption)
-    {
-        if (target != null)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
-            if (status.inAttackRange.Contains(target))
-            {
-                print("attack");
-            }
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 

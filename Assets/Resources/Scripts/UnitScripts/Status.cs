@@ -12,12 +12,12 @@ public class Status : Health
     public float special;//amount of special
     public float attackRange;//attack range distance
     public float sightRange;//sight range distance
-    public float speed;//speed 
+    public float speed;//speed
     public UnitTypeE unitType;//unit type enum
     public UnitBuildingE unitOrBuilding;//Identifies gameObject as unit or building
     public Vector2 facing;// vector2 of which direction unit is facing
-    private float checkRate = .1f;
-    private float nextCheck = .1f;
+    private float checkRate = .2f;
+    private float nextCheck = .2f;
 
     void Start()
     {
@@ -31,20 +31,19 @@ public class Status : Health
     void Update()
     {
         HealthCheck();
-        if (unitOrBuilding == UnitBuildingE.Unit && Time.time > nextCheck && target == null)
+        if (unitOrBuilding == UnitBuildingE.Unit && Time.time > nextCheck)// && target == null)
         {
             nextCheck = Time.time + checkRate;
             gameObject.GetComponent<UnitBrain>().CheckLogicMatrix();
-        }
-        if (unitOrBuilding == UnitBuildingE.Unit && target != null)
-        {
-            action.Action(target);
         }
     }
 
     void FixedUpdate()
     {
-
+        if (unitOrBuilding == UnitBuildingE.Unit && target != null)
+        {
+            action.Action(target);
+        }
     }
 
     void AddFromLogicMatrix()
@@ -73,7 +72,6 @@ public class Status : Health
                 gameObject.AddComponent(i.action.GetType());
             }
             logicGate.action = gameObject.GetComponent(i.action.GetType()) as IAction;
-            logicGate.actionSubOption = i.actionSubOption;
 
             if (gameObject.GetComponent(i.objectAction.GetType()) == null)
             {

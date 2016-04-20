@@ -24,11 +24,11 @@ public class UnitBrain : MonoBehaviour {
             else if (CheckCondition(i.objectCondition, i.condition, i.objectConditionSubOption, i.conditionSubOption) == true)
             {
                 //print(i.objectCondition + " " + i.condition + " TRUE");
-                if (CheckAction(i.objectAction, i.action, i.objectActionSubOption, i.actionSubOption) == false)
+                if (CheckAction(i.objectAction, i.action, i.objectActionSubOption) == false)
                 {
                     //print(i.objectAction + " " + i.action + " FALSE");
                 }
-                else if (CheckAction(i.objectAction, i.action, i.objectActionSubOption, i.actionSubOption) == true)
+                else if (CheckAction(i.objectAction, i.action, i.objectActionSubOption) == true)
                 {
                     //print(i.objectAction + " " + i.action + " TRUE");
                     status.action = i.action;
@@ -74,29 +74,15 @@ public class UnitBrain : MonoBehaviour {
     }
 
 //Checks the OBJECTACTION against ACTION with optional subOptions, returns bool
-    private bool CheckAction(IObject objectAction, IAction action, SubOption objectActionSubOption, SubOption actionSubOption)
+    private bool CheckAction(IObject objectAction, IAction action, SubOption objectActionSubOption)
     {
-        if (actionSubOption.subOption == true)
+        if (objectActionSubOption.subOption == true)
         {
-            if (objectActionSubOption.subOption == true)
-            {
-                return action.Action(objectAction.Object(status, objectActionSubOption), actionSubOption);
-            }
-            else
-            {
-                return action.Action(objectAction.Object(status), actionSubOption);
-            }
+            return action.ActionCheck(objectAction.Object(status, objectActionSubOption));
         }
         else
         {
-            if (objectActionSubOption.subOption == true)
-            {
-                return action.Action(objectAction.Object(status, objectActionSubOption));
-            }
-            else
-            {
-                return action.Action(objectAction.Object(status));
-            }
+            return action.ActionCheck(objectAction.Object(status));
         }
     }
 }

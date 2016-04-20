@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Special : MonoBehaviour, IAction
 {
-    public bool Action(GameObject target)
+    public bool ActionCheck(GameObject target)
     {
         return true;
     }
-    public bool Action(GameObject target, SubOption subOption)
+    public void Action(GameObject target)
     {
-        return true;
+
     }
 
     /*

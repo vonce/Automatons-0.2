@@ -11,34 +11,24 @@ public class Move : MonoBehaviour, IAction
         status = GetComponent<Status>();
     }
 
-    public bool Action(GameObject target)
+    public bool ActionCheck(GameObject target)
     {
         if (target != null)
         {
-            lastPos = transform.position;
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
             return true;
-            //automatically moves towards target within range
-            //create sprite script based on FACING
         }
         else
         {
             return false;
         }
     }
-    public bool Action(GameObject target, SubOption subOption)
+
+    public void Action(GameObject target)
     {
         if (target != null)
         {
             lastPos = transform.position;
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
-            return true;
-            //automatically moves towards target within range
-            //create sprite script based on FACING
-        }
-        else
-        {
-            return false;
         }
     }
 }

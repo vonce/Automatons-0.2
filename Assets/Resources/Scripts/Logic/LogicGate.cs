@@ -8,7 +8,6 @@ public struct LogicGate
     public ICondition condition;
     public SubOption conditionSubOption;
     public IAction action;
-    public SubOption actionSubOption;
     public IObject objectAction;
     public SubOption objectActionSubOption;
 }

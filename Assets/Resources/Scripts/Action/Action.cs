@@ -3,8 +3,9 @@ using System.Collections;
 
 public interface IAction
 {
-    bool Action(GameObject target);
-    bool Action(GameObject target, SubOption subOption);
+    bool ActionCheck(GameObject target);
+    void Action(GameObject target);
+
 }
 
 
