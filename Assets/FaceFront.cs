@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FaceFront : MonoBehaviour {
 
-    private Vector2 facing;
+    private Vector3 facing;
 
 	void Update () {
 
@@ -11,14 +11,14 @@ public class FaceFront : MonoBehaviour {
 
     }
 
-    Vector2 Face(GameObject target)
+    Vector3 Face(GameObject target)
     {
         if (target != null)
         {
-            facing = new Vector2(gameObject.transform.parent.transform.position.x - target.transform.position.x, gameObject.transform.parent.transform.position.y - target.transform.position.y);
+            facing = new Vector3(gameObject.transform.parent.transform.position.x - target.transform.position.x, 0, gameObject.transform.parent.transform.position.z - target.transform.position.z);
             facing = -facing.normalized;
+            facing.y = 1;
             gameObject.transform.parent.GetComponent<Status>().facing = facing;
-            facing.y = facing.y / 2;
             return facing;
         }
         else

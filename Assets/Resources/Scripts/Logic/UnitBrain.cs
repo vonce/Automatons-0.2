@@ -14,7 +14,7 @@ public class UnitBrain : MonoBehaviour {
 
     public void CheckLogicMatrix()
     {
-        print("CHECK");
+        //print("CHECK");
         foreach (LogicGate i in status.logicMatrix)
         {
             if (CheckCondition(i.objectCondition, i.condition, i.objectConditionSubOption, i.conditionSubOption) == false)

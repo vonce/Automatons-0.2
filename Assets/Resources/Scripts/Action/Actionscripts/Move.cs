@@ -4,7 +4,6 @@ using System.Collections;
 public class Move : MonoBehaviour, IAction
 {
     private Status status;
-    private Vector2 lastPos;
 
     void Start()
     {
@@ -27,8 +26,7 @@ public class Move : MonoBehaviour, IAction
     {
         if (target != null)
         {
-            lastPos = transform.position;
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
         }
     }
 }

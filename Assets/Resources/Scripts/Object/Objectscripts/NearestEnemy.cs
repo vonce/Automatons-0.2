@@ -34,7 +34,7 @@ public class NearestEnemy : MonoBehaviour, IObject
         float distance = Mathf.Infinity;
         foreach (GameObject i in enemiesList)
         {
-            Vector2 diff = i.transform.position - transform.position;
+            Vector3 diff = i.transform.position - transform.position;
             float curDistance = diff.magnitude;            
             if (curDistance < distance)
             {
@@ -74,7 +74,7 @@ public class NearestEnemy : MonoBehaviour, IObject
         float distance = Mathf.Infinity;
         foreach (GameObject i in enemiesList)
         {
-            Vector2 diff = i.transform.position - transform.position;
+            Vector3 diff = i.transform.position - transform.position;
             float curDistance = diff.magnitude;
             if (curDistance < distance && i.GetComponent<Status>().unitType == subOption.unitType)
             {

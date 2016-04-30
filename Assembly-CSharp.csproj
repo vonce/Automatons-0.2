@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Build.cs" />
+     <Compile Include="Assets\BulletTrail.cs" />
      <Compile Include="Assets\FaceFront.cs" />
      <Compile Include="Assets\Homing.cs" />
      <Compile Include="Assets\LogicMatrixConvert.cs" />
@@ -61,9 +62,6 @@
      <Compile Include="Assets\Resources\Scripts\Logic\LogicGate.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\SubOption.cs" />
      <Compile Include="Assets\Resources\Scripts\Logic\UnitBrain.cs" />
-     <Compile Include="Assets\Resources\Scripts\Logic\old logic\LogicArray.cs" />
-     <Compile Include="Assets\Resources\Scripts\Logic\old logic\ParseLogicArray.cs" />
-     <Compile Include="Assets\Resources\Scripts\Logic\old logic\UnitLogicArray.cs" />
      <Compile Include="Assets\Resources\Scripts\Master.cs" />
      <Compile Include="Assets\Resources\Scripts\Object\Object.cs" />
      <Compile Include="Assets\Resources\Scripts\Object\Objectscripts\AllyCommand.cs" />
@@ -76,8 +74,6 @@
      <Compile Include="Assets\Resources\Scripts\Projectiles\bullet\DestructBullet.cs" />
      <Compile Include="Assets\Resources\Scripts\Projectiles\bullet\MovementBullet.cs" />
      <Compile Include="Assets\Resources\Scripts\Resources.cs" />
-     <Compile Include="Assets\Resources\Scripts\UI\SelectManager.cs" />
-     <Compile Include="Assets\Resources\Scripts\UI\UIselected.cs" />
      <Compile Include="Assets\Resources\Scripts\Unit.cs" />
      <Compile Include="Assets\Resources\Scripts\UnitScripts\AttackRange.cs" />
      <Compile Include="Assets\Resources\Scripts\UnitScripts\Health.cs" />
@@ -86,6 +82,7 @@
      <Compile Include="Assets\Resources\Scripts\custom collider scripts\PolygonCollider2DEditor.cs" />
      <Compile Include="Assets\TESTSCRIPTDELETE.cs" />
      <Compile Include="Assets\Target.cs" />
+     <Compile Include="Assets\Trail.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -15,7 +15,7 @@ public class Status : Health
     public float speed;//speed
     public UnitTypeE unitType;//unit type enum
     public UnitBuildingE unitOrBuilding;//Identifies gameObject as unit or building
-    public Vector2 facing;// vector2 of which direction unit is facing
+    public Vector3 facing;// vector3 of which direction unit is facing
     private float checkRate = .2f;
     private float nextCheck = .2f;
 

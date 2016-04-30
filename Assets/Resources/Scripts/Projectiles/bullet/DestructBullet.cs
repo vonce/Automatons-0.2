@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DestructBullet : MonoBehaviour {
 
-    void OnTriggerEnter2D(Collider2D other)//trigger events
+    void OnTriggerEnter(Collider other)//trigger events
     {
         other.gameObject.GetComponentInParent<Status>().currentHealth--;
         Destroy(gameObject);

@@ -7,7 +7,6 @@ public class SightRange : MonoBehaviour {
     private float sightRange;
     private Status status;
     private UnitBrain unitBrain;
-    private Collider2D[] colliders;
     private float checkRate = .1f;
     private float nextCheck = .1f;
 
@@ -19,44 +18,44 @@ public class SightRange : MonoBehaviour {
 
     void Update()
     {
-        if(Time.time > nextCheck)
+        if (sightRange != status.sightRange)
         {
-            nextCheck = Time.time + checkRate;
-            CheckSightRange();
+            transform.localScale = new Vector2(status.sightRange, status.sightRange);
+            sightRange = (status.sightRange);
         }
     }
-
-    void CheckSightRange()
+/*    void CheckSightRange()
     {
         if (sightRange != status.sightRange)
         {
             transform.localScale = new Vector2(status.sightRange, status.sightRange);
             sightRange = (status.sightRange);
         }
-        colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, sightRange);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, sightRange);
 
         GameObject[] sightRangeArray = new GameObject[colliders.Length];
 
-        int j = 0;
 
         foreach (Collider2D i in colliders)
         {
-            if (i.gameObject.transform.parent.gameObject != gameObject.transform.parent.gameObject)
+            int j = 0;
+            if (i != null && i.gameObject.transform.parent.gameObject != gameObject.transform.parent.gameObject)
             {
                 sightRangeArray[j] = i.gameObject.transform.parent.gameObject;
                 j++;
             }
         }
-        status.inSightRange = new HashSet<GameObject>(sightRangeArray);  
+        status.inSightRange = new HashSet<GameObject>(sightRangeArray);
+        status.inSightRange.RemoveWhere(GameObject => GameObject == null);
     }
-/*
-    void OnTriggerEnter2D(Collider2D sight)
+    */
+    void OnTriggerEnter(Collider sight)
     {
         status.inSightRange.Add(sight.gameObject.transform.parent.gameObject);
         SightUpdate();
     }
 
-    void OnTriggerExit2D(Collider2D notVisible)
+    void OnTriggerExit(Collider notVisible)
     {
         status.inSightRange.Remove(notVisible.gameObject.transform.parent.gameObject);
         SightUpdate();
@@ -66,5 +65,5 @@ public class SightRange : MonoBehaviour {
     {
         status.inSightRange.RemoveWhere(GameObject => GameObject == null);
         //unitBrain.CheckLogicMatrix();
-    }*/
+    }
 }

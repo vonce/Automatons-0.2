@@ -6,6 +6,9 @@ public class TESTSCRIPTDELETE : MonoBehaviour
     private LogicGate logicGate0 = new LogicGate();
     private LogicGate logicGate1 = new LogicGate();
     private LogicGate logicGate2 = new LogicGate();
+    private LogicGate logicGate3 = new LogicGate();
+    private LogicGate logicGate4 = new LogicGate();
+    private LogicGate logicGate5 = new LogicGate();
 
     void Awake()
     {
@@ -26,8 +29,27 @@ public class TESTSCRIPTDELETE : MonoBehaviour
         logicGate2.action = gameObject.AddComponent<Attack>();
         logicGate2.objectAction = gameObject.AddComponent<EnemyCommand>();
 
+        logicGate3.objectCondition = gameObject.AddComponent<Self>();
+        logicGate3.condition = gameObject.AddComponent<Always>();
+        logicGate3.action = gameObject.AddComponent<Attack>();
+        logicGate3.objectAction = gameObject.AddComponent<EnemyCommand>();
+
+        logicGate4.objectCondition = gameObject.AddComponent<Self>();
+        logicGate4.condition = gameObject.AddComponent<Always>();
+        logicGate4.action = gameObject.AddComponent<Attack>();
+        logicGate4.objectAction = gameObject.AddComponent<EnemyCommand>();
+
+        logicGate5.objectCondition = gameObject.AddComponent<Self>();
+        logicGate5.condition = gameObject.AddComponent<Always>();
+        logicGate5.action = gameObject.AddComponent<Attack>();
+        logicGate5.objectAction = gameObject.AddComponent<EnemyCommand>();
+
+
         gameObject.GetComponent<Status>().logicMatrix[0] = logicGate0;
         gameObject.GetComponent<Status>().logicMatrix[1] = logicGate1;
         gameObject.GetComponent<Status>().logicMatrix[2] = logicGate2;
+        gameObject.GetComponent<Status>().logicMatrix[3] = logicGate3;
+        gameObject.GetComponent<Status>().logicMatrix[4] = logicGate4;
+        gameObject.GetComponent<Status>().logicMatrix[5] = logicGate5;
     }
 }

@@ -8,7 +8,6 @@ public class AttackRange : MonoBehaviour {
     private float attackRange;
     private Status status;
     private UnitBrain unitBrain;
-    private Collider2D[] colliders;
     private float checkRate = .1f;
     private float nextCheck = .1f;
 
@@ -18,7 +17,7 @@ public class AttackRange : MonoBehaviour {
         unitBrain = GetComponentInParent<UnitBrain>();
     }
 
-
+/*
     void Update()
     {
         if (Time.time > nextCheck)
@@ -35,21 +34,22 @@ public class AttackRange : MonoBehaviour {
             transform.localScale = new Vector2(status.attackRange, status.attackRange);
             attackRange = (status.attackRange);
         }
-        colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, attackRange);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, attackRange);
 
         GameObject[] attackRangeArray = new GameObject[colliders.Length];
 
-        int j = 0;
-        
         foreach (Collider2D i in colliders)
         {
-            if (i.gameObject.transform.parent.gameObject != gameObject.transform.parent.gameObject && i != null)
+            int j = 0;
+            if (i != null && i.gameObject.transform.parent.gameObject != gameObject.transform.parent.gameObject)
             {
+                
                 attackRangeArray[j] = i.gameObject.transform.parent.gameObject;
                 j++;
             }
         }
         status.inAttackRange = new HashSet<GameObject>(attackRangeArray);
+        status.inAttackRange.RemoveWhere(GameObject => GameObject == null);
     }
 /*
     void OnTriggerEnter2D(Collider2D sight)

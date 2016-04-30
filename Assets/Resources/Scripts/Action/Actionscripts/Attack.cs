@@ -3,15 +3,14 @@ using System.Collections;
 
 public class Attack : MonoBehaviour, IAction
 {
-    public Rigidbody2D BulletPrefab;
+    public Rigidbody BulletPrefab;
     public float fireRate;
     public Transform Front;
     public float projectileSpeed;
     private float nextFire;
-    private Vector2 lastPos;
-    Rigidbody2D bullet;
+    Rigidbody bullet;
     private Status status;
-    private Vector2 bulletVector;
+    private Vector3 bulletVector;
     private float targetDistance;
 
     void Awake()
@@ -35,20 +34,23 @@ public class Attack : MonoBehaviour, IAction
     {
         if (target != null)
         {
-            if (status.inAttackRange.Contains(target) == false)
+            targetDistance = Vector3.Distance(status.target.transform.position, transform.position);
+
+            if (status.attackRange < targetDistance)
             {
-                transform.position = Vector2.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
             }
-            if (status.inAttackRange.Contains(target) == true && Time.time > nextFire)
+            if (status.attackRange > targetDistance && Time.time > nextFire)
             {
-                bulletVector = gameObject.transform.position - target.transform.position;
-                bullet = Instantiate(BulletPrefab, Front.position, Front.rotation) as Rigidbody2D;
-                bullet.AddForce(-bulletVector.normalized * projectileSpeed, ForceMode2D.Force);
+                bulletVector = gameObject.transform.position - status.target.transform.position;
+                bullet = Instantiate(BulletPrefab, Front.position, Front.rotation) as Rigidbody;
+                bullet.AddForce(-bulletVector.normalized * projectileSpeed, ForceMode.Force);
 
                 nextFire = Time.time + fireRate;
             }
         }
     }
+}
 
     /*        
 
@@ -69,4 +71,3 @@ public class Attack : MonoBehaviour, IAction
             }
         }
         */
-}
