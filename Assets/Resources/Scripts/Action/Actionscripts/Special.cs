@@ -3,14 +3,90 @@ using System.Collections;
 
 public class Special : MonoBehaviour, IAction
 {
+    public Rigidbody RocketPrefab;
+    public float fireRate;
+    public Transform Top;
+    public Transform Front;
+    public float projectileSpeed;
+    private float nextFire;
+    private Rigidbody rocket;
+    private Status status;
+    private Rocket rocketScript;
+    private Vector3 rocketVector;
+    private float targetDistance;
+    private Vector3 beamVector;
+    private Rigidbody healBeam;
+    public Rigidbody BeamPrefab;
+
+
+    void Awake()
+    {
+        status = GetComponent<Status>();
+        nextFire = Time.time + fireRate;
+    }
+
     public bool ActionCheck(GameObject target)
     {
-        return true;
+        if (target != null && status.currentSpecial > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     public void Action(GameObject target)
     {
+        if ((target != null && status.currentSpecial > 0) && status.specialType == SpecialTypeE.Rocket)
+        {
 
+            targetDistance = Vector3.Distance(status.target.transform.position, transform.position);
+
+            if (status.attackRange < targetDistance)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
+            }
+            if (status.attackRange > targetDistance && Time.time > nextFire && status.specialType == SpecialTypeE.Rocket && status.currentSpecial >= 5)
+            {
+                rocketVector = Vector3.up;
+                rocket = Instantiate(RocketPrefab, Top.position, Top.rotation) as Rigidbody;
+                rocket.AddForce(rocketVector.normalized * projectileSpeed, ForceMode.Force);
+                rocketScript = rocket.GetComponent<Rocket>();
+                rocketScript.target = status.target;
+                status.currentSpecial = status.currentSpecial - 5;
+                nextFire = Time.time + fireRate;
+            }
+        }
+        if ((target != null && status.currentSpecial > 0) && status.specialType == SpecialTypeE.HealBeam)
+        {
+
+            targetDistance = Vector3.Distance(status.target.transform.position, transform.position);
+
+            if (status.attackRange < targetDistance)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
+            }
+            if (status.attackRange > targetDistance && Time.time > nextFire && status.specialType == SpecialTypeE.HealBeam && status.currentSpecial >= 1)
+            {
+                beamVector = gameObject.transform.position - status.target.transform.position;
+                if (healBeam == null)
+                {
+                    healBeam = Instantiate(BeamPrefab, Front.position, Quaternion.LookRotation(-beamVector)) as Rigidbody;
+                    status.currentSpecial = status.currentSpecial - 1;
+                }
+            }
+        }
     }
+    void Update()
+    {
+        if (healBeam != null && gameObject != null && status.target != null)
+        {
+            healBeam.position = Front.position;
+            healBeam.rotation = Quaternion.LookRotation(-(transform.position - status.target.transform.position));
+        }
+    }
+}
 
     /*
     public Rigidbody2D rocketPrefab;
@@ -48,4 +124,3 @@ public class Special : MonoBehaviour, IAction
             nextFire = Time.time + fireRate;
         }
     }*/
-}

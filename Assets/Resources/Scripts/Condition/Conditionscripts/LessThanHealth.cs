@@ -6,7 +6,7 @@ public class LessThanHealth : MonoBehaviour, ICondition
 {
     public bool Condition(GameObject target)
     {
-        if (target.GetComponent<Status>().percentHealth < 50)
+        if (target != null && target.GetComponent<Status>().percentHealth < 50)
         {
             return true;
         }
@@ -17,7 +17,7 @@ public class LessThanHealth : MonoBehaviour, ICondition
     }
     public bool Condition(GameObject target, SubOption subOption)
     {
-        if (target.GetComponent<Status>().percentHealth < subOption.percent)
+        if (target != null && target.GetComponent<Status>().percentHealth < subOption.percent)
         {
             return true;
         }

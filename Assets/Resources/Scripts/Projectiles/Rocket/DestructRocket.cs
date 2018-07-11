@@ -1,11 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DestructRocket : MonoBehaviour {
+public class DestructRocket : MonoBehaviour
+{
+    private Vector3 startPosition;
+    public Vector3 direction;
 
-    void OnTriggerEnter2D(Collider2D other)//trigger events
+    private float createTime;
+
+    void Start()
     {
-        other.gameObject.GetComponent<Status>().currentHealth = other.gameObject.GetComponent<Status>().currentHealth - 3;
+        createTime = Time.time;
+        startPosition = transform.position;
+    }
+
+    void OnTriggerEnter(Collider other)//trigger events
+    {
+        other.gameObject.GetComponentInParent<Status>().currentHealth--;
         Destroy(gameObject);
+    }
+
+    void Update()
+    {
+        direction = -(transform.position - startPosition).normalized;
+
+        Destroy(gameObject, 2f);
     }
 }

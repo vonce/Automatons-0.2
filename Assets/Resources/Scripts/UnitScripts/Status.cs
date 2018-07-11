@@ -9,19 +9,21 @@ public class Status : Health
     public GameObject target;//target of gameObject
     public HashSet<GameObject> inSightRange = new HashSet<GameObject>();//hashset of objects in sight range
     public HashSet<GameObject> inAttackRange = new HashSet<GameObject>();//hashset of objects in attack range
-    public float special;//amount of special
     public float attackRange;//attack range distance
     public float sightRange;//sight range distance
     public float speed;//speed
     public UnitTypeE unitType;//unit type enum
     public UnitBuildingE unitOrBuilding;//Identifies gameObject as unit or building
+    public AttackTypeE attackType;//Type of attack
+    public SpecialTypeE specialType;//Type of special
     public Vector3 facing;// vector3 of which direction unit is facing
-    private float checkRate = .2f;
-    private float nextCheck = .2f;
+    private float checkRate = .1f;
+    private float nextCheck = .1f;
 
     void Start()
     {
         FullHealth();
+        FullSpecial();
         if (unitOrBuilding == UnitBuildingE.Unit)
         {
             AddFromLogicMatrix();//add scripts from logic matrix
@@ -31,6 +33,7 @@ public class Status : Health
     void Update()
     {
         HealthCheck();
+        SpecialCheck();
         if (unitOrBuilding == UnitBuildingE.Unit && Time.time > nextCheck)// && target == null)
         {
             nextCheck = Time.time + checkRate;

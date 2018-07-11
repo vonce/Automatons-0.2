@@ -4,27 +4,59 @@ using System.Collections;
 public class InstantiateUnit : MonoBehaviour
 {
 
-    public GameObject UnitPrefab;
-    GameObject Unit;
+    public GameObject SoldierPrefab;
+    public GameObject BruiserPrefab;
+    public GameObject TankPrefab;
+    public FactoryUnitTypeE UnitType;
+    private GameObject InstantiatedUnit;
+    private GameObject Unit;
     public Transform Front;
-    public float nextUnit;
+    private float nextUnit;
     public float unitRate;
     private Status status;
 
     void Awake()
     {
+        if (UnitType == FactoryUnitTypeE.Soldier)
+        {
+            Unit = SoldierPrefab;
+        }
+        if (UnitType == FactoryUnitTypeE.Bruiser)
+        {
+            Unit = BruiserPrefab;
+        }
+        if (UnitType == FactoryUnitTypeE.Tank)
+        {
+            Unit = TankPrefab;
+        }
         status = GetComponent<Status>();
     }
 
     void Update()
     {
+        if (UnitType == FactoryUnitTypeE.Soldier)
+        {
+            Unit = SoldierPrefab;
+        }
+        if (UnitType == FactoryUnitTypeE.Bruiser)
+        {
+            Unit = BruiserPrefab;
+        }
+        if (UnitType == FactoryUnitTypeE.Tank)
+        {
+            Unit = TankPrefab;
+        }
         if (Time.time > nextUnit)
         {
             nextUnit = Time.time + unitRate;
-            Unit = Instantiate(UnitPrefab, Front.position, Quaternion.identity) as GameObject;
+            InstantiatedUnit = Instantiate(Unit, Front.position, Quaternion.identity) as GameObject;
+            InstantiatedUnit.tag = gameObject.tag;
+            InstantiatedUnit.GetComponent<Status>().attackType = GetComponent<Status>().attackType;
+            InstantiatedUnit.GetComponent<Status>().specialType = GetComponent<Status>().specialType;
+
             for (int i = 0; i <=5; i++)
             {
-                Unit.GetComponent<Status>().logicMatrix[i] = GetComponent<Status>().logicMatrix[i];
+                InstantiatedUnit.GetComponent<Status>().logicMatrix[i] = GetComponent<Status>().logicMatrix[i];
             }
         }
     }

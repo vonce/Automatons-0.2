@@ -4,13 +4,20 @@ using System.Collections;
 public class Attack : MonoBehaviour, IAction
 {
     public Rigidbody BulletPrefab;
+    public Rigidbody GrenadePrefab;
+    public Rigidbody BeamPrefab;
     public float fireRate;
     public Transform Front;
     public float projectileSpeed;
     private float nextFire;
     Rigidbody bullet;
+    Rigidbody grenade;
+    Rigidbody beam;
     private Status status;
     private Vector3 bulletVector;
+    private Vector3 grenadeVector;
+    private Vector3 beamVector;
+    private float vectorMag;
     private float targetDistance;
 
     void Awake()
@@ -40,14 +47,42 @@ public class Attack : MonoBehaviour, IAction
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
             }
-            if (status.attackRange > targetDistance && Time.time > nextFire)
+            if (status.attackRange >= targetDistance && Time.time > nextFire && status.attackType == AttackTypeE.Grenade)//Grenade attack
             {
-                bulletVector = gameObject.transform.position - status.target.transform.position;
-                bullet = Instantiate(BulletPrefab, Front.position, Front.rotation) as Rigidbody;
-                bullet.AddForce(-bulletVector.normalized * projectileSpeed, ForceMode.Force);
+                grenadeVector = -(gameObject.transform.position - status.target.transform.position)/2;
+                grenadeVector += new Vector3(0, 9, 0);
+                grenade = Instantiate(GrenadePrefab, Front.position, Front.rotation) as Rigidbody;
+                grenade.velocity = grenadeVector;
 
                 nextFire = Time.time + fireRate;
             }
+
+            if (status.attackRange >= targetDistance && Time.time > nextFire && status.attackType == AttackTypeE.Laser)//Laser attack
+            {
+                bulletVector = gameObject.transform.position - status.target.transform.position;
+                bullet = Instantiate(BulletPrefab, Front.position, Quaternion.LookRotation(bulletVector)) as Rigidbody;
+                bullet.AddForce(-bulletVector.normalized * projectileSpeed, ForceMode.Force);
+                
+
+                nextFire = Time.time + fireRate;
+            }
+
+            if (status.attackRange >= targetDistance && Time.time > nextFire && status.attackType == AttackTypeE.Beam)//Beam attack
+            {
+                beamVector = gameObject.transform.position - status.target.transform.position;
+                if (beam == null)
+                {
+                    beam = Instantiate(BeamPrefab, Front.position, Quaternion.LookRotation(-beamVector)) as Rigidbody;
+                }
+            }
+        }
+    }
+    void Update()
+    {
+        if (beam != null && gameObject != null && status.target != null)
+        {
+            beam.position = Front.position;
+            beam.rotation = Quaternion.LookRotation(-(transform.position - status.target.transform.position));
         }
     }
 }

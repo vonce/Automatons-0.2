@@ -8,8 +8,6 @@ public class AttackRange : MonoBehaviour {
     private float attackRange;
     private Status status;
     private UnitBrain unitBrain;
-    private float checkRate = .1f;
-    private float nextCheck = .1f;
 
     void Start()
     {

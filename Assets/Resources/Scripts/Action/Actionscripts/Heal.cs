@@ -14,41 +14,35 @@ public class Heal : MonoBehaviour//, IAction
     */
     public float healRate;
     public float healDistance;
-    private GameObject[] temp;
+    private GameObject[] team;
     private float nextHeal;
 
     void Update () {
-        if (gameObject.tag == "Red")
-        {
-            temp = GameObject.FindGameObjectsWithTag("Red");
-        }
-        if (gameObject.tag == "Blue")
-        {
-            temp = GameObject.FindGameObjectsWithTag("Blue");
-        }
+        team = GameObject.FindGameObjectsWithTag(gameObject.tag);
+
         if (Time.time > nextHeal)
         {
-            foreach (GameObject i in temp)
+            foreach (GameObject i in team)
             {
                 Vector2 diff = i.transform.position - transform.position;
                 float curDistance = diff.magnitude;
                 if (curDistance < healDistance && i.GetComponent<Status>().currentHealth < i.GetComponent<Status>().maxHealth)
                 {
-                    if(i.GetComponent<Status>().maxHealth - i.GetComponent<Status>().currentHealth < 5)
+                    if(i.GetComponent<Status>().maxHealth - i.GetComponent<Status>().currentHealth < 1)
                     {
                         i.GetComponent<Status>().currentHealth = i.GetComponent<Status>().maxHealth;
                     }
                     else
                     {
-                        i.GetComponent<Status>().currentHealth = i.GetComponent<Status>().currentHealth + 5;
+                        i.GetComponent<Status>().currentHealth = i.GetComponent<Status>().currentHealth + 3;
                     }
-                    if (10 - i.GetComponent<Status>().special < 5)
+                    if (10 - i.GetComponent<Status>().currentSpecial < 5)
                     {
-                        i.GetComponent<Status>().special = 10;
+                        i.GetComponent<Status>().currentSpecial = 10;
                     }
                     else
                     {
-                        i.GetComponent<Status>().special = i.GetComponent<Status>().special + 5;
+                        i.GetComponent<Status>().currentSpecial = i.GetComponent<Status>().currentSpecial + 5;
                     }
                     nextHeal = Time.time + healRate;
                 }

@@ -3,6 +3,48 @@ using System.Collections;
 
 public class TESTSCRIPTDELETE : MonoBehaviour
 {
+    public ObjectE objectCondition0;
+    public ConditionE condition0;
+    public bool subOption0;
+    public int subOptionPercent0;
+    public ActionE action0;
+    public ObjectE objectAction0;
+
+    public ObjectE objectCondition1;
+    public ConditionE condition1;
+    public bool subOption1;
+    public int subOptionPercent1;
+    public ActionE action1;
+    public ObjectE objectAction1;
+
+    public ObjectE objectCondition2;
+    public ConditionE condition2;
+    public bool subOption2;
+    public int subOptionPercent2;
+    public ActionE action2;
+    public ObjectE objectAction2;
+
+    public ObjectE objectCondition3;
+    public ConditionE condition3;
+    public bool subOption3;
+    public int subOptionPercent3;
+    public ActionE action3;
+    public ObjectE objectAction3;
+
+    public ObjectE objectCondition4;
+    public ConditionE condition4;
+    public bool subOption4;
+    public int subOptionPercent4;
+    public ActionE action4;
+    public ObjectE objectAction4;
+
+    public ObjectE objectCondition5;
+    public ConditionE condition5;
+    public bool subOption5;
+    public int subOptionPercent5;
+    public ActionE action5;
+    public ObjectE objectAction5;
+
     private LogicGate logicGate0 = new LogicGate();
     private LogicGate logicGate1 = new LogicGate();
     private LogicGate logicGate2 = new LogicGate();
@@ -10,40 +52,46 @@ public class TESTSCRIPTDELETE : MonoBehaviour
     private LogicGate logicGate4 = new LogicGate();
     private LogicGate logicGate5 = new LogicGate();
 
+    LogicGate Gate(ObjectE objectCondition, ConditionE condition, bool subOption, int subOptionPercent, ActionE action, ObjectE objectAction)
+    {
+        LogicGate tempGate = new LogicGate();
+
+        if (objectCondition == ObjectE.AllyCommand) { tempGate.objectCondition = gameObject.AddComponent<AllyCommand>(); }//AllyCommand, EnemyCommand, LowestHealthEnemy, NearestAlly, NearestEnemy, Self
+        if (objectCondition == ObjectE.EnemyCommand) { tempGate.objectCondition = gameObject.AddComponent<EnemyCommand>(); }
+        if (objectCondition == ObjectE.LowestHealthEnemy) { tempGate.objectCondition = gameObject.AddComponent<LowestHealthEnemy>(); }
+        if (objectCondition == ObjectE.NearestAlly) { tempGate.objectCondition = gameObject.AddComponent<NearestAlly>(); }
+        if (objectCondition == ObjectE.NearestEnemy) { tempGate.objectCondition = gameObject.AddComponent<NearestEnemy>(); }
+        if (objectCondition == ObjectE.Self) { tempGate.objectCondition = gameObject.AddComponent<Self>(); }
+
+        if (condition == ConditionE.Always) { tempGate.condition = gameObject.AddComponent<Always>(); }//Always, LessThanHealth, MoreThanHealth
+        if (condition == ConditionE.LessThanHealth) { tempGate.condition = gameObject.AddComponent<LessThanHealth>(); }
+        if (condition == ConditionE.MoreThanHealth) { tempGate.condition = gameObject.AddComponent<MoreThanHealth>(); }
+
+        tempGate.conditionSubOption.subOption = subOption;
+        tempGate.conditionSubOption.percent = subOptionPercent;
+
+        if (action == ActionE.Attack) { tempGate.action = gameObject.AddComponent<Attack>(); }//Attack, Move, Special 
+        if (action == ActionE.Move) { tempGate.action = gameObject.AddComponent<Move>(); }
+        if (action == ActionE.Special) { tempGate.action = gameObject.AddComponent<Special>(); }
+
+        if (objectAction == ObjectE.AllyCommand) { tempGate.objectAction = gameObject.AddComponent<AllyCommand>(); }//AllyCommand, EnemyCommand, LowestHealthEnemy, NearestAlly, NearestEnemy, Self
+        if (objectAction == ObjectE.EnemyCommand) { tempGate.objectAction = gameObject.AddComponent<EnemyCommand>(); }
+        if (objectAction == ObjectE.LowestHealthEnemy) { tempGate.objectAction = gameObject.AddComponent<LowestHealthEnemy>(); }
+        if (objectAction == ObjectE.NearestAlly) { tempGate.objectAction = gameObject.AddComponent<NearestAlly>(); }
+        if (objectAction == ObjectE.NearestEnemy) { tempGate.objectAction = gameObject.AddComponent<NearestEnemy>(); }
+        if (objectAction == ObjectE.Self) { tempGate.objectAction = gameObject.AddComponent<Self>(); }
+
+        return tempGate;
+    }
+
     void Awake()
     {
-        logicGate0.objectCondition = gameObject.AddComponent<Self>();
-        logicGate0.condition = gameObject.AddComponent<LessThanHealth>();
-        logicGate0.conditionSubOption.subOption = true;
-        logicGate0.conditionSubOption.percent = 40;
-        logicGate0.action = gameObject.AddComponent<Move>();
-        logicGate0.objectAction = gameObject.AddComponent<AllyCommand>();
-
-        logicGate1.objectCondition = gameObject.AddComponent<Self>();
-        logicGate1.condition = gameObject.AddComponent<Always>();
-        logicGate1.action = gameObject.AddComponent<Attack>();
-        logicGate1.objectAction = gameObject.AddComponent<NearestEnemy>();
-
-        logicGate2.objectCondition = gameObject.AddComponent<Self>();
-        logicGate2.condition = gameObject.AddComponent<Always>();
-        logicGate2.action = gameObject.AddComponent<Attack>();
-        logicGate2.objectAction = gameObject.AddComponent<EnemyCommand>();
-
-        logicGate3.objectCondition = gameObject.AddComponent<Self>();
-        logicGate3.condition = gameObject.AddComponent<Always>();
-        logicGate3.action = gameObject.AddComponent<Attack>();
-        logicGate3.objectAction = gameObject.AddComponent<EnemyCommand>();
-
-        logicGate4.objectCondition = gameObject.AddComponent<Self>();
-        logicGate4.condition = gameObject.AddComponent<Always>();
-        logicGate4.action = gameObject.AddComponent<Attack>();
-        logicGate4.objectAction = gameObject.AddComponent<EnemyCommand>();
-
-        logicGate5.objectCondition = gameObject.AddComponent<Self>();
-        logicGate5.condition = gameObject.AddComponent<Always>();
-        logicGate5.action = gameObject.AddComponent<Attack>();
-        logicGate5.objectAction = gameObject.AddComponent<EnemyCommand>();
-
+        logicGate0 = Gate(objectCondition0, condition0, subOption0, subOptionPercent0, action0, objectAction0);
+        logicGate1 = Gate(objectCondition1, condition1, subOption1, subOptionPercent1, action1, objectAction1);
+        logicGate2 = Gate(objectCondition2, condition2, subOption2, subOptionPercent2, action2, objectAction2);
+        logicGate3 = Gate(objectCondition3, condition3, subOption3, subOptionPercent3, action3, objectAction3);
+        logicGate4 = Gate(objectCondition4, condition4, subOption4, subOptionPercent4, action4, objectAction4);
+        logicGate5 = Gate(objectCondition5, condition5, subOption5, subOptionPercent5, action5, objectAction5);
 
         gameObject.GetComponent<Status>().logicMatrix[0] = logicGate0;
         gameObject.GetComponent<Status>().logicMatrix[1] = logicGate1;
