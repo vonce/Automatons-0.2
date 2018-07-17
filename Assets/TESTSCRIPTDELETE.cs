@@ -70,9 +70,10 @@ public class TESTSCRIPTDELETE : MonoBehaviour
         tempGate.conditionSubOption.subOption = subOption;
         tempGate.conditionSubOption.percent = subOptionPercent;
 
-        if (action == ActionE.Attack) { tempGate.action = gameObject.AddComponent<Attack>(); }//Attack, Move, Special 
+        if (action == ActionE.Attack) { tempGate.action = gameObject.AddComponent<Attack>(); }//Attack, Move, Special, Aura
         if (action == ActionE.Move) { tempGate.action = gameObject.AddComponent<Move>(); }
         if (action == ActionE.Special) { tempGate.action = gameObject.AddComponent<Special>(); }
+        if (action == ActionE.Aura) { tempGate.action = gameObject.AddComponent<Aura>(); }
 
         if (objectAction == ObjectE.AllyCommand) { tempGate.objectAction = gameObject.AddComponent<AllyCommand>(); }//AllyCommand, EnemyCommand, LowestHealthEnemy, NearestAlly, NearestEnemy, Self
         if (objectAction == ObjectE.EnemyCommand) { tempGate.objectAction = gameObject.AddComponent<EnemyCommand>(); }

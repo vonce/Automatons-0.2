@@ -16,6 +16,7 @@ public class Status : Health
     public UnitBuildingE unitOrBuilding;//Identifies gameObject as unit or building
     public AttackTypeE attackType;//Type of attack
     public SpecialTypeE specialType;//Type of special
+    public AuraTypeE auraType;//Type of aura
     public Vector3 facing;// vector3 of which direction unit is facing
     private float checkRate = .1f;
     private float nextCheck = .1f;

@@ -15,7 +15,7 @@ public class Explosion : MonoBehaviour {
         if (other.gameObject.GetComponentInParent<Status>() != null)
         {
             status = other.gameObject.GetComponentInParent<Status>();
-            status.currentHealth = status.currentHealth - 3;
+            status.currentHealth = status.currentHealth - 5;
         }
         Destroy(gameObject);
     }
