@@ -18,7 +18,7 @@ public class Heal : MonoBehaviour//, IAction
     private float nextHeal;
 
     void Update () {
-        team = GameObject.FindGameObjectsWithTag(gameObject.tag);
+        //team = GameObject.FindGameObjectsWithTag(gameObject.tag);
 
         if (Time.time > nextHeal)
         {

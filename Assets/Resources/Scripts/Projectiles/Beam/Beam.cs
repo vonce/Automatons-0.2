@@ -11,6 +11,7 @@ public class Beam : MonoBehaviour
     private Color c1 = Color.red;
     private Color c2 = Color.magenta;
     private LineRenderer lineRenderer;
+    private List<Collider> inBeam = new List<Collider>();
 
     void Start()
     {
@@ -19,21 +20,47 @@ public class Beam : MonoBehaviour
         startPosition = transform.position;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if (inBeam.Contains(other) != true && other.gameObject.GetComponentInParent<Status>() != null)
+        {
+            inBeam.Add(other);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (inBeam.Contains(other) == true)
+        {
+            inBeam.Remove(other);
+        }
+    }
+
     void OnTriggerStay(Collider other)//trigger events
     {
-        if ((nextTick <= Time.time) && (other.gameObject.GetComponentInParent<Status>() != null))
+        if (inBeam.Contains(other) != true && other.gameObject.GetComponentInParent<Status>() != null)
         {
-            other.gameObject.GetComponentInParent<Status>().currentHealth--;
-            nextTick = Time.time + tick;
+            inBeam.Add(other);
         }
     }
 
     void Update()
     {
+        if (nextTick <= Time.time)
+        {
+            foreach (Collider col in inBeam)
+            {
+                if (col != null)
+                {
+                    col.GetComponentInParent<Status>().currentHealth--;
+                }
+                nextTick = Time.time + tick;
+            }
+        }
         float lerp = Mathf.PingPong(Time.time, 1f);
         
-  
-        Destroy(gameObject, .5f);
+        Destroy(gameObject, 1f);
         lineRenderer.SetColors(Color.Lerp(c2, c1, lerp), Color.Lerp(c1, c2, lerp));
     }
 }

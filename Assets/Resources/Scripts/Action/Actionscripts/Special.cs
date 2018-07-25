@@ -104,7 +104,7 @@ public class Special : MonoBehaviour, IAction
     }
     void Update()
     {
-        if (healBeam != null && gameObject != null && status.target != null)
+        if (healBeam != null && gameObject != null && status.target != null && Quaternion.LookRotation(-(transform.position - status.target.transform.position)) != Quaternion.identity)
         {
             healBeam.position = Front.position;
             healBeam.rotation = Quaternion.LookRotation(-(transform.position - status.target.transform.position));

@@ -17,7 +17,7 @@ public class MoreThanHealth : MonoBehaviour, ICondition
     }
     public bool Condition(GameObject target, SubOption subOption)
     {
-        if (target.GetComponent<Status>().percentHealth > subOption.percent)
+        if (target != null && target.GetComponent<Status>().percentHealth > subOption.percent)
         {
             return true;
         }

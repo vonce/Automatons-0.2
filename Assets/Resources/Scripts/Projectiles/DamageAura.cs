@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageAura : MonoBehaviour {
+public class DamageAura : MonoBehaviour
+{
     
     public float tick;
     private float nextTick;
+    private List<Collider> inAura = new List<Collider>();
 
 
     // Use this for initialization
@@ -16,26 +18,37 @@ public class DamageAura : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        nextTick = Time.time + tick;
+        if (inAura.Contains(other) != true && other.gameObject.GetComponentInParent<Status>() != null)
+        {
+            inAura.Add(other);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (inAura.Contains(other) == true)
+        {
+            inAura.Remove(other);
+        }
     }
 
     void OnTriggerStay(Collider other)//trigger events
     {
-        if (other.gameObject.GetComponentInParent<Status>() != null)
-        {
-            if ((other.gameObject.GetComponentInParent<Status>().currentHealth < other.gameObject.GetComponentInParent<Status>().maxHealth))
-            {
-                other.gameObject.GetComponentInParent<Status>().currentHealth++;
-            }   
-            
-        }
+        
     }
 
     // Update is called once per frame
     void Update ()
     {
-
+        if (nextTick <= Time.time)
+        {
+            foreach (Collider col in inAura)
+                if (col != null && col.gameObject.GetComponentInParent<Status>().currentHealth < col.gameObject.GetComponentInParent<Status>().maxHealth)
+                {
+                    col.GetComponentInParent<Status>().currentHealth--;
+                }
+            nextTick = Time.time + tick;
+        }
         Destroy(gameObject, 5f);
-
     }
 }

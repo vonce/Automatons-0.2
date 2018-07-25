@@ -18,8 +18,9 @@ public class Status : Health
     public SpecialTypeE specialType;//Type of special
     public AuraTypeE auraType;//Type of aura
     public Vector3 facing;// vector3 of which direction unit is facing
-    private float checkRate = .1f;
-    private float nextCheck = .1f;
+    public bool aura = true;
+    private float checkRate = .5f;
+    private float nextCheck = .5f;
 
     void Start()
     {

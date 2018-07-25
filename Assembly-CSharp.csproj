@@ -61,9 +61,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CommandHeal.cs" />
     <Compile Include="Assets\Explosion.cs" />
     <Compile Include="Assets\FaceFront.cs" />
+    <Compile Include="Assets\GateDropdown.cs" />
     <Compile Include="Assets\GateSelector.cs" />
+    <Compile Include="Assets\HealAura.cs" />
     <Compile Include="Assets\Resources\Scripts\Action\Action.cs" />
     <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Attack.cs" />
     <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Aura.cs" />
@@ -105,8 +108,6 @@
     <Compile Include="Assets\Resources\Scripts\UnitScripts\Status.cs" />
     <Compile Include="Assets\Select.cs" />
     <Compile Include="Assets\Target.cs" />
-    <Compile Include="Assets\TESTSCRIPTDELETE.cs" />
-    <Compile Include="Assets\TESTSCRIPTDELETE2.cs" />
     <Compile Include="Assets\Trail.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Vince/Documents/Automatons 0.2/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

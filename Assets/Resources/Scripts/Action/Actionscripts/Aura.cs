@@ -5,7 +5,8 @@ using UnityEngine;
 public class Aura : MonoBehaviour, IAction
 {
     public GameObject damageAuraPrefab;
-    private GameObject damageAura;
+    public GameObject healAuraPrefab;
+    private GameObject aura;
     private Status status;
     private float targetDistance;
 
@@ -16,7 +17,7 @@ public class Aura : MonoBehaviour, IAction
 
     public bool ActionCheck(GameObject target)
     {
-        if (target != null)
+        if (target != null && status.aura == true)
         {
             return true;
         }
@@ -25,6 +26,7 @@ public class Aura : MonoBehaviour, IAction
             return false;
         }
     }
+
     public void Action(GameObject target)
     {
         targetDistance = Vector3.Distance(status.target.transform.position, transform.position);
@@ -33,26 +35,28 @@ public class Aura : MonoBehaviour, IAction
         {
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, status.speed * Time.deltaTime);
         }
-        if (status.attackRange >= targetDistance && damageAura == null)//Grenade attack
+        if (status.attackRange >= targetDistance && status.auraType == AuraTypeE.DamageAura && aura == null)//damage aura
         {
-            damageAura = Instantiate(damageAuraPrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
+            aura = Instantiate(damageAuraPrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
         }
 
-        if (status.attackRange >= targetDistance)//Laser attack
+        if (status.attackRange >= targetDistance && status.auraType == AuraTypeE.HealAura && aura == null)//heal aura
+        {
+            aura = Instantiate(healAuraPrefab, gameObject.transform.position, Quaternion.identity) as GameObject;
+        }
+
+        if (status.attackRange >= targetDistance && status.attackType == AttackTypeE.Beam)
         {
             
         }
-
-        if (status.attackRange >= targetDistance && status.attackType == AttackTypeE.Beam)//Beam attack
-        {
-            
-        }
+        status.aura = false;
     }
+
     void Update()
     {
-        if (damageAura != null)
+        if (aura != null)
         {
-            damageAura.transform.position = gameObject.transform.position;
+            aura.transform.position = gameObject.transform.position;
         }
     }
 }

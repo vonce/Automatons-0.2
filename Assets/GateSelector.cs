@@ -53,7 +53,7 @@ public class GateSelector : MonoBehaviour
     private LogicGate logicGate4 = new LogicGate();
     private LogicGate logicGate5 = new LogicGate();
 
-    LogicGate Gate(ObjectE objectCondition, ConditionE condition, bool subOption, int subOptionPercent, ActionE action, ObjectE objectAction)
+    public LogicGate Gate(ObjectE objectCondition, ConditionE condition, bool subOption, int subOptionPercent, ActionE action, ObjectE objectAction)
     {
         LogicGate tempGate = new LogicGate();
 
@@ -71,7 +71,7 @@ public class GateSelector : MonoBehaviour
         tempGate.conditionSubOption.subOption = subOption;
         tempGate.conditionSubOption.percent = subOptionPercent;
 
-        if (action == ActionE.Attack) { tempGate.action = gameObject.AddComponent<Attack>(); }//Attack, Move, Special 
+        if (action == ActionE.Attack) { tempGate.action = gameObject.AddComponent<Attack>(); }//Attack, Move, Special, Aura
         if (action == ActionE.Move) { tempGate.action = gameObject.AddComponent<Move>(); }
         if (action == ActionE.Special) { tempGate.action = gameObject.AddComponent<Special>(); }
         if (action == ActionE.Aura) { tempGate.action = gameObject.AddComponent<Aura>(); }

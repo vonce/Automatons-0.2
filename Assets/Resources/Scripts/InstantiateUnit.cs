@@ -53,6 +53,7 @@ public class InstantiateUnit : MonoBehaviour
             InstantiatedUnit.tag = gameObject.tag;
             InstantiatedUnit.GetComponent<Status>().attackType = GetComponent<Status>().attackType;
             InstantiatedUnit.GetComponent<Status>().specialType = GetComponent<Status>().specialType;
+            InstantiatedUnit.GetComponent<Status>().auraType = GetComponent<Status>().auraType;
 
             for (int i = 0; i <=5; i++)
             {

@@ -54,7 +54,7 @@ public class Attack : MonoBehaviour, IAction
                 grenade = Instantiate(GrenadePrefab, Front.position, Front.rotation) as Rigidbody;
                 grenade.velocity = grenadeVector;
 
-                nextFire = Time.time + fireRate;
+                nextFire = Time.time + (fireRate) * 2;
             }
 
             if (status.attackRange >= targetDistance && Time.time > nextFire && status.attackType == AttackTypeE.Laser)//Laser attack
@@ -79,7 +79,7 @@ public class Attack : MonoBehaviour, IAction
     }
     void Update()
     {
-        if (beam != null && gameObject != null && status.target != null)
+        if (beam != null && gameObject != null && status.target != null && transform.position - status.target.transform.position != new Vector3(0,0,0))
         {
             beam.position = Front.position;
             beam.rotation = Quaternion.LookRotation(-(transform.position - status.target.transform.position));

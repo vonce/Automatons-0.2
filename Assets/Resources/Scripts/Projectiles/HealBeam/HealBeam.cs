@@ -11,6 +11,7 @@ public class HealBeam : MonoBehaviour
     private Color c1 = Color.cyan;
     private Color c2 = Color.blue;
     private LineRenderer lineRenderer;
+    private List<Collider> inBeam = new List<Collider>();
 
     void Start()
     {
@@ -19,20 +20,44 @@ public class HealBeam : MonoBehaviour
         startPosition = transform.position;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (inBeam.Contains(other) != true && other.gameObject.GetComponentInParent<Status>() != null)
+        {
+            inBeam.Add(other);
+            
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (inBeam.Contains(other) == true)
+        {
+            inBeam.Remove(other);
+        }
+    }
+
     void OnTriggerStay(Collider other)//trigger events
     {
-        if ((nextTick <= Time.time) && (other.gameObject.GetComponentInParent<Status>() != null))
+        if (inBeam.Contains(other) != true && other.gameObject.GetComponentInParent<Status>() != null)
         {
-            if (other.gameObject.GetComponentInParent<Status>().currentHealth < other.gameObject.GetComponentInParent<Status>().maxHealth)
-            {
-                other.gameObject.GetComponentInParent<Status>().currentHealth++;
-            }
-            nextTick = Time.time + tick;
+            inBeam.Add(other);
         }
     }
 
     void Update()
     {
+        if (nextTick <= Time.time)
+        {
+            foreach (Collider col in inBeam)
+            {
+                if (col != null && col.gameObject.GetComponentInParent<Status>().currentHealth < col.gameObject.GetComponentInParent<Status>().maxHealth)
+                {
+                    col.GetComponentInParent<Status>().currentHealth++;
+                }
+            }
+            nextTick = Time.time + tick;
+        }
         float lerp = Mathf.PingPong(Time.time, 1f);
 
         Destroy(gameObject, .5f);
