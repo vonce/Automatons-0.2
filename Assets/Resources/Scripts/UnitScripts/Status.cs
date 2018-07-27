@@ -19,8 +19,9 @@ public class Status : Health
     public AuraTypeE auraType;//Type of aura
     public Vector3 facing;// vector3 of which direction unit is facing
     public bool aura = true;
-    private float checkRate = .5f;
-    private float nextCheck = .5f;
+    public bool active = true;
+    private float checkRate = .25f;
+    private float nextCheck = .25f;
 
     void Start()
     {
@@ -45,7 +46,7 @@ public class Status : Health
 
     void FixedUpdate()
     {
-        if (unitOrBuilding == UnitBuildingE.Unit && target != null)
+        if (unitOrBuilding == UnitBuildingE.Unit && target != null && active == true)
         {
             action.Action(target);
         }

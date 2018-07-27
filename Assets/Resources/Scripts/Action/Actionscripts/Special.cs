@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Special : MonoBehaviour, IAction
 {
+    public ActionE actionEnum = ActionE.Special;
     public Rigidbody RocketPrefab;
     public Rigidbody EmpRocketPrefab;
     public float fireRate;

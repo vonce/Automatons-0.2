@@ -64,6 +64,7 @@
     <Compile Include="Assets\CommandHeal.cs" />
     <Compile Include="Assets\Explosion.cs" />
     <Compile Include="Assets\FaceFront.cs" />
+    <Compile Include="Assets\GameHandler.cs" />
     <Compile Include="Assets\GateDropdown.cs" />
     <Compile Include="Assets\GateSelector.cs" />
     <Compile Include="Assets\HealAura.cs" />

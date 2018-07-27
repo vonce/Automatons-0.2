@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Aura : MonoBehaviour, IAction
 {
+    public ActionE actionEnum = ActionE.Aura;
     public GameObject damageAuraPrefab;
     public GameObject healAuraPrefab;
     private GameObject aura;

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Attack : MonoBehaviour, IAction
 {
+    public ActionE actionEnum = ActionE.Attack;
     public Rigidbody BulletPrefab;
     public Rigidbody GrenadePrefab;
     public Rigidbody BeamPrefab;
@@ -63,7 +64,6 @@ public class Attack : MonoBehaviour, IAction
                 bullet = Instantiate(BulletPrefab, Front.position, Quaternion.LookRotation(bulletVector)) as Rigidbody;
                 bullet.AddForce(-bulletVector.normalized * projectileSpeed, ForceMode.Force);
                 
-
                 nextFire = Time.time + fireRate;
             }
 

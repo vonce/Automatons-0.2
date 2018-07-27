@@ -8,6 +8,12 @@ public class GateDropdown : MonoBehaviour {
 
     private Select select;
 
+    public float delayTime;
+
+    public Dropdown attackTypeDropdown;
+    public Dropdown specialTypeDropdown;
+    public Dropdown auraTypeDropdown;
+
     public Dropdown objectConditionDropdown0;
     public Dropdown conditionDropdown0;
     public Dropdown subOptionDropdown0;
@@ -89,6 +95,42 @@ public class GateDropdown : MonoBehaviour {
 
 
     //populate dropdown menus with enum values
+    void AttackDropdown(Dropdown dropdown)
+    {
+        List<string> attacklistnames = new List<string>();
+        string[] attacknames = ObjectE.GetNames(typeof(AttackTypeE));
+        foreach (string i in attacknames)
+        {
+            attacklistnames.Add(i);
+        }
+        dropdown.ClearOptions();
+        dropdown.AddOptions(attacklistnames);
+    }
+
+    void SpecialDropdown(Dropdown dropdown)
+    {
+        List<string> speciallistnames = new List<string>();
+        string[] specialnames = ObjectE.GetNames(typeof(SpecialTypeE));
+        foreach (string i in specialnames)
+        {
+            speciallistnames.Add(i);
+        }
+        dropdown.ClearOptions();
+        dropdown.AddOptions(speciallistnames);
+    }
+
+    void AuraDropdown(Dropdown dropdown)
+    {
+        List<string> auralistnames = new List<string>();
+        string[] auranames = ObjectE.GetNames(typeof(AuraTypeE));
+        foreach (string i in auranames)
+        {
+            auralistnames.Add(i);
+        }
+        dropdown.ClearOptions();
+        dropdown.AddOptions(auralistnames);
+    }
+
     void ObjectDropdown (Dropdown dropdown)
     {
         List<string> objlistnames = new List<string>();
@@ -128,7 +170,9 @@ public class GateDropdown : MonoBehaviour {
     {
         select = gameObject.GetComponent<Select>();
 
-        
+        attackTypeDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        specialTypeDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        auraTypeDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
 
         objectConditionDropdown0.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
         objectConditionDropdown1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
@@ -153,6 +197,10 @@ public class GateDropdown : MonoBehaviour {
         objectActionDropdown2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
         objectActionDropdown3.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
         objectActionDropdown4.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+
+        AttackDropdown(attackTypeDropdown);
+        SpecialDropdown(specialTypeDropdown);
+        AuraDropdown(auraTypeDropdown);
 
         ObjectDropdown(objectConditionDropdown0);
         ObjectDropdown(objectConditionDropdown1);
@@ -216,9 +264,13 @@ public class GateDropdown : MonoBehaviour {
         objectAction2 = (ObjectE)objectActionDropdown2.value;
         objectAction3 = (ObjectE)objectActionDropdown3.value;
         objectAction4 = (ObjectE)objectActionDropdown4.value;
-
-        if (select != null)
+        
+        if (select != null && delayTime <= Time.time)
         {
+            select.selected.GetComponent<Status>().attackType = (AttackTypeE)attackTypeDropdown.value;
+            select.selected.GetComponent<Status>().specialType = (SpecialTypeE)specialTypeDropdown.value;
+            select.selected.GetComponent<Status>().auraType = (AuraTypeE)auraTypeDropdown.value;
+
             logicGate0 = select.selected.GetComponent<GateSelector>().Gate(objectCondition0, condition0, subOption0, subOptionPercent0, action0, objectAction0);
             logicGate1 = select.selected.GetComponent<GateSelector>().Gate(objectCondition1, condition1, subOption1, subOptionPercent1, action1, objectAction1);
             logicGate2 = select.selected.GetComponent<GateSelector>().Gate(objectCondition2, condition2, subOption2, subOptionPercent2, action2, objectAction2);
@@ -232,7 +284,7 @@ public class GateDropdown : MonoBehaviour {
             select.selected.GetComponent<Status>().logicMatrix[3] = logicGate3;
             select.selected.GetComponent<Status>().logicMatrix[4] = logicGate4;
             select.selected.GetComponent<Status>().logicMatrix[5] = logicGate5;
+            
         }
-
     }
 }

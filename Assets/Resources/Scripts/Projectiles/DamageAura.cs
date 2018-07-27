@@ -43,12 +43,12 @@ public class DamageAura : MonoBehaviour
         if (nextTick <= Time.time)
         {
             foreach (Collider col in inAura)
-                if (col != null && col.gameObject.GetComponentInParent<Status>().currentHealth < col.gameObject.GetComponentInParent<Status>().maxHealth)
+                if (col != null)
                 {
                     col.GetComponentInParent<Status>().currentHealth--;
                 }
             nextTick = Time.time + tick;
         }
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 10f);
     }
 }
