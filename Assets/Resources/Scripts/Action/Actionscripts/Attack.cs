@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Attack : MonoBehaviour, IAction
 {
-    public ActionE actionEnum = ActionE.Attack;
     public Rigidbody BulletPrefab;
     public Rigidbody GrenadePrefab;
     public Rigidbody BeamPrefab;
@@ -21,6 +20,10 @@ public class Attack : MonoBehaviour, IAction
     private float vectorMag;
     private float targetDistance;
 
+    public ActionE enumID()
+    {
+        return ActionE.Attack;
+    }
     void Awake()
     {
         status = GetComponent<Status>();

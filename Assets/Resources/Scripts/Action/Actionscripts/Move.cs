@@ -3,9 +3,12 @@ using System.Collections;
 
 public class Move : MonoBehaviour, IAction
 {
-    public ActionE actionEnum = ActionE.Move;
     private Status status;
 
+    public ActionE enumID()
+    {
+        return ActionE.Move;
+    }
     void Start()
     {
         status = GetComponent<Status>();

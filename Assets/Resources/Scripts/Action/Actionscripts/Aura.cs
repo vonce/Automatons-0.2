@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Aura : MonoBehaviour, IAction
 {
-    public ActionE actionEnum = ActionE.Aura;
     public GameObject damageAuraPrefab;
     public GameObject healAuraPrefab;
     private GameObject aura;
     private Status status;
     private float targetDistance;
 
+    public ActionE enumID()
+    {
+        return ActionE.Aura;
+    }
     void Awake()
     {
         status = GetComponent<Status>();

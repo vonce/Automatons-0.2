@@ -4,8 +4,10 @@ using System;
 
 public class LessThanHealth : MonoBehaviour, ICondition
 {
-    public ConditionE conditionEnum = ConditionE.LessThanHealth;
-
+    public ConditionE enumID()
+    {
+        return ConditionE.LessThanHealth;
+    }
     public bool Condition(GameObject target)
     {
         if (target != null && target.GetComponent<Status>().percentHealth < 50)

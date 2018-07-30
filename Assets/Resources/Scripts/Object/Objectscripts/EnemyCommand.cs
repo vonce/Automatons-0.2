@@ -5,6 +5,11 @@ public class EnemyCommand : MonoBehaviour, IObject
 {
     private GameObject[] enemyCommand;
 
+    public ObjectE enumID()
+    {
+        return ObjectE.EnemyCommand;
+    }
+
     public GameObject Object(Status status)
     {
         if (gameObject.tag == "Blue")

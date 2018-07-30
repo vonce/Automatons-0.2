@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Special : MonoBehaviour, IAction
 {
-    public ActionE actionEnum = ActionE.Special;
     public Rigidbody RocketPrefab;
     public Rigidbody EmpRocketPrefab;
     public float fireRate;
@@ -22,7 +21,10 @@ public class Special : MonoBehaviour, IAction
     private Rigidbody healBeam;
     public Rigidbody BeamPrefab;
 
-
+    public ActionE enumID()
+    {
+        return ActionE.Special;
+    }
     void Awake()
     {
         status = GetComponent<Status>();

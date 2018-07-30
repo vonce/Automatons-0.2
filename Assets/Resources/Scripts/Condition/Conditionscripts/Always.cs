@@ -4,8 +4,10 @@ using System;
 
 public class Always : MonoBehaviour, ICondition
 {
-    public ConditionE conditionEnum = ConditionE.Always;
-
+    public ConditionE enumID()
+    {
+        return ConditionE.Always;
+    }
     public bool Condition(GameObject target)
     {
         return true;

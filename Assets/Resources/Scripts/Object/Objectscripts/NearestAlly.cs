@@ -6,6 +6,11 @@ public class NearestAlly : MonoBehaviour, IObject
 {
     private List<GameObject> allyList;
 
+    public ObjectE enumID()
+    {
+        return ObjectE.NearestAlly;
+    }
+
     public GameObject Object(Status status)
     {
         allyList = new List<GameObject>();

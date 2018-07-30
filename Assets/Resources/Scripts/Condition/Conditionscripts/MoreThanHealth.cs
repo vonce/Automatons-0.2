@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MoreThanHealth : MonoBehaviour, ICondition
 {
-    public ConditionE conditionEnum = ConditionE.MoreThanHealth;
-
+    public ConditionE enumID()
+    {
+        return ConditionE.MoreThanHealth;
+    }
     public bool Condition(GameObject target)
     {
         if (target != null && target.GetComponent<Status>().percentHealth > 50)

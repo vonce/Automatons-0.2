@@ -6,6 +6,10 @@ public class NearestEnemy : MonoBehaviour, IObject
 {
     private List<GameObject> enemiesList;
 
+    public ObjectE enumID()
+    {
+        return ObjectE.NearestEnemy;
+    }
     public GameObject Object(Status status)
     {
         enemiesList = new List<GameObject>();

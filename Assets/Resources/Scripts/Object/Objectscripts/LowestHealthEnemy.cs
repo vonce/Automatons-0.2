@@ -6,6 +6,10 @@ public class LowestHealthEnemy : MonoBehaviour, IObject
 {
     private List<GameObject> enemiesList;
 
+    public ObjectE enumID()
+    {
+        return ObjectE.LowestHealthEnemy;
+    }
     public GameObject Object(Status status)
     {
         enemiesList = new List<GameObject>();
