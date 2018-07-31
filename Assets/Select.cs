@@ -31,7 +31,7 @@ public class Select : MonoBehaviour {
                 }
                 
 
-                if (selected != null && selectedText != null)
+                if (selected.GetComponent<Status>().unitType == UnitTypeE.Factory && selected != null && selectedText != null)
                 {
                     gateDropdown.delayTime = Time.time + .1f;
                     

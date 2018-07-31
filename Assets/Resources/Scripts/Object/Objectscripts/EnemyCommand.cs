@@ -22,7 +22,7 @@ public class EnemyCommand : MonoBehaviour, IObject
         }
         foreach(GameObject i in enemyCommand)
         {
-            if (i.GetComponent<Status>().unitType == UnitTypeE.Command)
+            if (i.GetComponent<Status>() != null && i.GetComponent<Status>().unitType == UnitTypeE.Command)
             {
                 return i;
             }
@@ -41,7 +41,7 @@ public class EnemyCommand : MonoBehaviour, IObject
         }
         foreach (GameObject i in enemyCommand)
         {
-            if (i.GetComponent<Status>().unitType == UnitTypeE.Command)
+            if (i.GetComponent<Status>() != null && i.GetComponent<Status>().unitType == UnitTypeE.Command)
             {
                 return i;
             }

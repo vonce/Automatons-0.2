@@ -5,17 +5,26 @@ using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour {
 
+    public Plane plane;
     public Text blueMetalText;
     public Text redMetalText;
     public int blueMetal;
     public int redMetal;
-    public CanvasRenderer button;
+    public GameObject factory;
+    public GameObject refinery;
+    private GameObject buildingPlaced;
+    private GameObject building;
+    public CanvasRenderer nextTurnButton;
+    public CanvasRenderer buildFactoryButton;
+    public CanvasRenderer buildRefineryButton;
     public float dayLength;
     public CanvasRenderer panel;
     private float nextDay;
     private bool active;
     private bool team;
     private Color cl;
+    private int layermask = 1 << 12;
+    private float dist;
     GameObject[] allObjects;
 
 	// Use this for initialization
@@ -30,11 +39,13 @@ public class GameHandler : MonoBehaviour {
         active = true;
         team = false;
         nextDay = Time.time;
-        button.GetComponent<Button>().onClick.AddListener(playerControl);
+        nextTurnButton.GetComponent<Button>().onClick.AddListener(playerControl);
+        buildFactoryButton.GetComponent<Button>().onClick.AddListener(buildFactory);
+        buildRefineryButton.GetComponent<Button>().onClick.AddListener(buildRefinery);
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         if (Time.time >= nextDay && active == true)
         {
@@ -52,12 +63,60 @@ public class GameHandler : MonoBehaviour {
             active = false;
             gameObject.GetComponent<Select>().selected = null;
         }
-	}
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit raycasthit = new RaycastHit();
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycasthit, Mathf.Infinity, layermask) == true && building != null)
+            {
+                if (gameObject.tag == "Blue" && blueMetal >= 50)
+                {
+                    buildingPlaced = Instantiate(building, raycasthit.point, Quaternion.identity);
+                    buildingPlaced.tag = "Blue";
+                    blueMetal = blueMetal - 50;
+                    blueMetalText.text = blueMetal.ToString();
+                    building = null;
+                }
+                if (gameObject.tag == "Red" && redMetal >= 50)
+                {
+                    buildingPlaced = Instantiate(building, raycasthit.point, Quaternion.identity);
+                    buildingPlaced.tag = "Red";
+                    redMetal = redMetal - 50;
+                    redMetalText.text = redMetal.ToString();
+                    building = null;
+                }
+            }
+        }
+    }
+    void buildFactory()
+    {
+        if (building == null || building == refinery)
+        {
+            building = factory;
+        }
+        else if (building == factory)
+        {
+            building = null;
+        }
+    }
+
+    void buildRefinery()
+    {
+        if (building == null || building == factory)
+        {
+            building = refinery;
+        }
+        else if (building == refinery)
+        {
+            building = null;
+        }
+    }
 
     void playerControl()
     {
         if (cl == Color.red)
         {
+            allObjects = GameObject.FindObjectsOfType<GameObject>();
             foreach (GameObject obj in allObjects)
             {
                 if (obj != null && obj.GetComponent<Status>() != null)

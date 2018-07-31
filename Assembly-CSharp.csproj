@@ -110,6 +110,7 @@
     <Compile Include="Assets\Resources\Scripts\UnitScripts\Status.cs" />
     <Compile Include="Assets\Select.cs" />
     <Compile Include="Assets\Target.cs" />
+    <Compile Include="Assets\TeamColorBuildable.cs" />
     <Compile Include="Assets\Trail.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Vince/Documents/Automatons 0.2/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
