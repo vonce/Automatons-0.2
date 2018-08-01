@@ -10,6 +10,9 @@ public class GateDropdown : MonoBehaviour {
 
     public float delayTime;
 
+    public CanvasRenderer copyButton;
+    public CanvasRenderer pasteButton;
+
     public Dropdown attackTypeDropdown;
     public Dropdown specialTypeDropdown;
     public Dropdown auraTypeDropdown;
@@ -93,6 +96,17 @@ public class GateDropdown : MonoBehaviour {
     private LogicGate logicGate4 = new LogicGate();
     private LogicGate logicGate5 = new LogicGate();
 
+    private AttackTypeE copyAttackType;
+    private SpecialTypeE copySpecialType;
+    private AuraTypeE copyAuraType;
+
+    private LogicGate copyLogicGate0 = new LogicGate();
+    private LogicGate copyLogicGate1 = new LogicGate();
+    private LogicGate copyLogicGate2 = new LogicGate();
+    private LogicGate copyLogicGate3 = new LogicGate();
+    private LogicGate copyLogicGate4 = new LogicGate();
+    private LogicGate copyLogicGate5 = new LogicGate();
+
 
     //populate dropdown menus with enum values
     void AttackDropdown(Dropdown dropdown)
@@ -170,6 +184,9 @@ public class GateDropdown : MonoBehaviour {
     {
         select = gameObject.GetComponent<Select>();
 
+        copyButton.GetComponent<Button>().onClick.AddListener(copy);
+        pasteButton.GetComponent<Button>().onClick.AddListener(paste);
+
         attackTypeDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
         specialTypeDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
         auraTypeDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
@@ -234,9 +251,64 @@ public class GateDropdown : MonoBehaviour {
         
     }
 
-    void selectChanged ()
+    void copy ()
     {
+        if (select != null)
+        {
+            copyAttackType = (AttackTypeE)attackTypeDropdown.value;
+            copySpecialType = (SpecialTypeE)specialTypeDropdown.value;
+            copyAuraType = (AuraTypeE)auraTypeDropdown.value;
 
+            copyLogicGate0 = select.selected.GetComponent<Status>().logicMatrix[0];
+            copyLogicGate1 = select.selected.GetComponent<Status>().logicMatrix[1];
+            copyLogicGate2 = select.selected.GetComponent<Status>().logicMatrix[2];
+            copyLogicGate3 = select.selected.GetComponent<Status>().logicMatrix[3];
+            copyLogicGate4 = select.selected.GetComponent<Status>().logicMatrix[4];
+        }
+    }
+
+    void paste ()
+    {
+        if (select != null)
+        {
+            select.selected.GetComponent<Status>().attackType = copyAttackType;
+            select.selected.GetComponent<Status>().specialType = copySpecialType;
+            select.selected.GetComponent<Status>().auraType = copyAuraType;
+
+            select.selected.GetComponent<Status>().logicMatrix[0] = copyLogicGate0;
+            select.selected.GetComponent<Status>().logicMatrix[1] = copyLogicGate1;
+            select.selected.GetComponent<Status>().logicMatrix[2] = copyLogicGate2;
+            select.selected.GetComponent<Status>().logicMatrix[3] = copyLogicGate3;
+            select.selected.GetComponent<Status>().logicMatrix[4] = copyLogicGate4;
+
+/*            attackTypeDropdown.value = (int)select.selected.GetComponent<Status>().attackType;
+            specialTypeDropdown.value = (int)select.selected.GetComponent<Status>().specialType;
+            auraTypeDropdown.value = (int)select.selected.GetComponent<Status>().auraType;
+
+            objectConditionDropdown0.value = (int)select.selected.GetComponent<Status>().logicMatrix[0].objectCondition.enumID();
+            objectConditionDropdown1.value = (int)select.selected.GetComponent<Status>().logicMatrix[1].objectCondition.enumID();
+            objectConditionDropdown2.value = (int)select.selected.GetComponent<Status>().logicMatrix[2].objectCondition.enumID();
+            objectConditionDropdown3.value = (int)select.selected.GetComponent<Status>().logicMatrix[3].objectCondition.enumID();
+            objectConditionDropdown4.value = (int)select.selected.GetComponent<Status>().logicMatrix[4].objectCondition.enumID();
+
+            conditionDropdown0.value = (int)select.selected.GetComponent<Status>().logicMatrix[0].condition.enumID();
+            conditionDropdown1.value = (int)select.selected.GetComponent<Status>().logicMatrix[1].condition.enumID();
+            conditionDropdown2.value = (int)select.selected.GetComponent<Status>().logicMatrix[2].condition.enumID();
+            conditionDropdown3.value = (int)select.selected.GetComponent<Status>().logicMatrix[3].condition.enumID();
+            conditionDropdown4.value = (int)select.selected.GetComponent<Status>().logicMatrix[4].condition.enumID();
+
+            actionDropdown0.value = (int)select.selected.GetComponent<Status>().logicMatrix[0].action.enumID();
+            actionDropdown1.value = (int)select.selected.GetComponent<Status>().logicMatrix[1].action.enumID();
+            actionDropdown2.value = (int)select.selected.GetComponent<Status>().logicMatrix[2].action.enumID();
+            actionDropdown3.value = (int)select.selected.GetComponent<Status>().logicMatrix[3].action.enumID();
+            actionDropdown4.value = (int)select.selected.GetComponent<Status>().logicMatrix[4].action.enumID();
+
+            objectActionDropdown0.value = (int)select.selected.GetComponent<Status>().logicMatrix[0].objectAction.enumID();
+            objectActionDropdown1.value = (int)select.selected.GetComponent<Status>().logicMatrix[1].objectAction.enumID();
+            objectActionDropdown2.value = (int)select.selected.GetComponent<Status>().logicMatrix[2].objectAction.enumID();
+            objectActionDropdown3.value = (int)select.selected.GetComponent<Status>().logicMatrix[3].objectAction.enumID();
+            objectActionDropdown4.value = (int)select.selected.GetComponent<Status>().logicMatrix[4].objectAction.enumID();*/
+        }
     }
 
     void DropdownValueChanged ()
@@ -276,14 +348,12 @@ public class GateDropdown : MonoBehaviour {
             logicGate2 = select.selected.GetComponent<GateSelector>().Gate(objectCondition2, condition2, subOption2, subOptionPercent2, action2, objectAction2);
             logicGate3 = select.selected.GetComponent<GateSelector>().Gate(objectCondition3, condition3, subOption3, subOptionPercent3, action3, objectAction3);
             logicGate4 = select.selected.GetComponent<GateSelector>().Gate(objectCondition4, condition4, subOption4, subOptionPercent4, action4, objectAction4);
-            logicGate5 = select.selected.GetComponent<GateSelector>().Gate(objectCondition5, condition5, subOption5, subOptionPercent5, action5, objectAction5);
 
             select.selected.GetComponent<Status>().logicMatrix[0] = logicGate0;
             select.selected.GetComponent<Status>().logicMatrix[1] = logicGate1;
             select.selected.GetComponent<Status>().logicMatrix[2] = logicGate2;
             select.selected.GetComponent<Status>().logicMatrix[3] = logicGate3;
             select.selected.GetComponent<Status>().logicMatrix[4] = logicGate4;
-            select.selected.GetComponent<Status>().logicMatrix[5] = logicGate5;
             
         }
     }

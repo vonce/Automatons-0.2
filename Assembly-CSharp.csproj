@@ -68,6 +68,8 @@
     <Compile Include="Assets\GateDropdown.cs" />
     <Compile Include="Assets\GateSelector.cs" />
     <Compile Include="Assets\HealAura.cs" />
+    <Compile Include="Assets\Lose.cs" />
+    <Compile Include="Assets\playButton.cs" />
     <Compile Include="Assets\Refinery.cs" />
     <Compile Include="Assets\Resources\Scripts\Action\Action.cs" />
     <Compile Include="Assets\Resources\Scripts\Action\Actionscripts\Attack.cs" />

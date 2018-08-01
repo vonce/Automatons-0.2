@@ -1,4 +1,118 @@
 sceneSetups:
-- path: Assets/scene1.unity
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/Splash screen.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/game.unity
   isLoaded: 1
   isActive: 1

@@ -23,7 +23,7 @@ public class GameHandler : MonoBehaviour {
     private bool active;
     private bool team;
     private Color cl;
-    private int layermask = 1 << 12;
+    private int layermask = 1 << 13;
     private float dist;
     GameObject[] allObjects;
 
@@ -69,7 +69,7 @@ public class GameHandler : MonoBehaviour {
             RaycastHit raycasthit = new RaycastHit();
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycasthit, Mathf.Infinity, layermask) == true && building != null)
             {
-                if (gameObject.tag == "Blue" && blueMetal >= 50)
+                if (gameObject.tag == "Blue" && blueMetal >= 50 && raycasthit.transform.gameObject.tag == "Blue")
                 {
                     buildingPlaced = Instantiate(building, raycasthit.point, Quaternion.identity);
                     buildingPlaced.tag = "Blue";
@@ -77,7 +77,7 @@ public class GameHandler : MonoBehaviour {
                     blueMetalText.text = blueMetal.ToString();
                     building = null;
                 }
-                if (gameObject.tag == "Red" && redMetal >= 50)
+                if (gameObject.tag == "Red" && redMetal >= 50 && raycasthit.transform.gameObject.tag == "Red")
                 {
                     buildingPlaced = Instantiate(building, raycasthit.point, Quaternion.identity);
                     buildingPlaced.tag = "Red";
